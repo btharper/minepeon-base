@@ -1,12 +1,8 @@
 <?php
 
-include_once('functions.inc.php');
-include_once('settings.inc.php');
 if(!isset($settings['update'])) {
     $settings['update'] = false;
 }
-this_session_start();
-login_check("quick");
 
 if ($settings['lang'] == "no"){
 include("lang/no/lang.no.php");
@@ -24,7 +20,9 @@ include("lang/en/lang.en.php");
       <li><a href="/settings.php"><?php echo $lang["settings"]; ?></a></li>
       <li><a href="/plugins.php"><?php echo $lang["plugins"]; ?></a></li> 
       <li><a href="/about.php"><?php echo $lang["about"]; ?></a></li>
-      <li><a href="http://minepeon.com/forums/">Forum</a></li>
+      <li><a href="http://minepeon.com/forums/" target=_blank>Forum</a></li>
+      <li><a class='btceuro' href="http://fr.investing.com/currencies/btc-eur" target=_blank><?php echo 'BTC/'.$_SESSION["btceuro"].' €'; ?></a></li>
+      <li><a class='btcdollars' href="http://fr.investing.com/currencies/btc-usd" target=_blank><?php echo 'BTC/'.$_SESSION["btcdollars"].' $'; ?></a></li>
 <?php 
    if ($handle = opendir('plugins/api_menu/')) {
         while (false !== ($entry = readdir($handle))) {
