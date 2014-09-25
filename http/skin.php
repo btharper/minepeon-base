@@ -1,5 +1,4 @@
 <?php
-//echo '<script type="text/javascript">alert("plop");</script>';
 /* SKIN SAVE OPTIMIZED */
 	function skinDisplay(){
 		/* take the choice*/
