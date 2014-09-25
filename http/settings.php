@@ -2,6 +2,7 @@
 
 require_once('settings.inc.php');
 require_once('miner.inc.php');
+
  
 // Check for settings to write and do it after all checks
 $writeSettings=false;
@@ -37,13 +38,8 @@ if (isset($_POST['lang'])) {
 if (isset($_POST['userPassword1'])) {
 
 	if ($_POST['userPassword1'] <> '') {
-        $salt = md5(uniqid(mt_rand(1, mt_getrandmax())));
- 	$settings['loginSalt'] = $salt;
-        $password = md5($_POST['userPassword1'].$salt); 
- 	$settings['loginPassword'] = $password;
-        $settings['loginTry'] = 0;
-        ksort($settings);
-        writeSettings($settings);
+	
+		exec("/usr/bin/htpasswd -b /opt/minepeon/etc/uipassword minepeon " . $_POST['userPassword1']);
 		header('Location: /settings.php');
 		exit;
 
@@ -89,7 +85,6 @@ if (isset($_POST['donateEnable']) and isset($_POST['donateAmount'])) {
     $settings['donateEnable'] = false;
     $settings['donateAmount'] = 0;
   }
-  $settings['donateTime'] = $_POST['donateTime'];
   $writeSettings=true;
   
 }
@@ -411,36 +406,6 @@ include('menu.php');
               <input type="number" value="<?php echo $settings['donateAmount'] ?>" placeholder="Donation minutes" id="donateAmount" name="donateAmount" class="form-control">
               <span class="input-group-addon">minutes per day</span>
             </div>
-<div class="input-group">
-  <span class="input-group-addon">Donate At</span>
-<select name="donateTime" class="form-control">
-          <option <?php if ($settings['donateTime'] == "0"){echo "selected";} ?>  value="0">0</option>
-          <option <?php if ($settings['donateTime'] == "1"){echo "selected";} ?> value="1">1</option>
-          <option <?php if ($settings['donateTime'] == "2"){echo "selected";} ?>  value="2">2</option>
-          <option <?php if ($settings['donateTime'] == "3"){echo "selected";} ?>  value="3">3</option>
-          <option <?php if ($settings['donateTime'] == "4"){echo "selected";} ?>  value="4">4</option>
-          <option <?php if ($settings['donateTime'] == "5"){echo "selected";} ?>  value="5">5</option>
-          <option <?php if ($settings['donateTime'] == "6"){echo "selected";} ?>  value="6">6</option>
-          <option <?php if ($settings['donateTime'] == "7"){echo "selected";} ?>  value="7">7</option>
-          <option <?php if ($settings['donateTime'] == "8"){echo "selected";} ?>  value="8">8</option>
-          <option <?php if ($settings['donateTime'] == "9"){echo "selected";} ?>  value="9">9</option>
-          <option <?php if ($settings['donateTime'] == "10"){echo "selected";} ?>  value="10">10</option>
-          <option <?php if ($settings['donateTime'] == "11"){echo "selected";} ?>  value="11">11</option>
-          <option <?php if ($settings['donateTime'] == "12"){echo "selected";} ?>  value="12">12</option>
-          <option <?php if ($settings['donateTime'] == "13"){echo "selected";} ?>  value="13">13</option>
-          <option <?php if ($settings['donateTime'] == "14"){echo "selected";} ?>  value="14">14</option>
-          <option <?php if ($settings['donateTime'] == "15"){echo "selected";} ?>  value="15">15</option>
-          <option <?php if ($settings['donateTime'] == "16"){echo "selected";} ?>  value="16">16</option>
-          <option <?php if ($settings['donateTime'] == "17"){echo "selected";} ?>  value="17">17</option>
-          <option <?php if ($settings['donateTime'] == "18"){echo "selected";} ?>  value="18">18</option>
-          <option <?php if ($settings['donateTime'] == "19"){echo "selected";} ?>  value="19">19</option>
-          <option <?php if ($settings['donateTime'] == "20"){echo "selected";} ?>  value="20">20</option>
-          <option <?php if ($settings['donateTime'] == "21"){echo "selected";} ?>  value="21">21</option>
-          <option <?php if ($settings['donateTime'] == "22"){echo "selected";} ?>  value="22">22</option>
-          <option <?php if ($settings['donateTime'] == "23"){echo "selected";} ?>  value="23">23</option>
-          </select>
-              <span class="input-group-addon">O'Clock</span>
-            </div>
           </div>
         </div>
       </div>
@@ -476,6 +441,24 @@ include('menu.php');
       </div>
     </fieldset>
   </form>
+<?php
+ echo skinChoose(); //skin.php
+webcamChooseDisplay(); //skin.php
+?>
+<!--Form for choose if Display Webcam or not -->
+<?php $settingsSkin=simplexml_load_file("xml/settingsSkin.xml"); $formWebcamSelected=array('',''); switch($settingsSkin->DisplayWebcam){case "0": $formWebcamSelected[0]="formWebcamSelected"; break; case "1":$formWebcamSelected[1]="formWebcamSelected";break;} ?>
+<span class="form-horizontal" id="form-webcam"> <legend>Display Webcam</legend>
+<form name="webcamDisplayOn" action="/settings.php" method="post" id="form-webcam-on">
+<input type="hidden" name="webcamON" value="1">
+<input type="submit" value="ON" id="formWebcamON" class="form-webcam-bouton <?php echo $formWebcamSelected[1]; ?>";>
+</form> <~~~~>
+<form name="webcamDisplayOFF" action="/settings.php" method="post" id="form-webcam-off">
+<input type="hidden" name="webcamOFF" value="1">
+<input type="submit" value="OFF" id="formWebcamOFF" class="form-webcam-bouton <?php echo $formWebcamSelected[0]; ?>";>
+</form>
+</span>
+<!-- END Form for choose if Display Webcam or not -->
+
 <script type="text/javascript" id="js">
   function checkPass()
 {
