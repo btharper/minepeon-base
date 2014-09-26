@@ -1,7 +1,6 @@
-minepeon-base
+minepeon-base (VoxDemonix Edition)
 =============
 
-I DON'T HAVE FINISH TO UPLOAD, DON'T USE NOW PLZ, I EDIT AND SIGNAL ON FORUM WHEN I HAVE FINISH
 
 
 To make the MinePeon user;-
