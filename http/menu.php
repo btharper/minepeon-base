@@ -21,8 +21,8 @@ include("lang/en/lang.en.php");
       <li><a href="/plugins.php"><?php echo $lang["plugins"]; ?></a></li> 
       <li><a href="/about.php"><?php echo $lang["about"]; ?></a></li>
       <li><a href="http://minepeon.com/forums/" target=_blank>Forum</a></li>
-      <li><a class='btceuro' href="http://fr.investing.com/currencies/btc-eur" target=_blank><?php echo 'BTC/'.$_SESSION["btceuro"].' €'; ?></a></li>
-      <li><a class='btcdollars' href="http://fr.investing.com/currencies/btc-usd" target=_blank><?php echo 'BTC/'.$_SESSION["btcdollars"].' $'; ?></a></li>
+      <li><a class='btceuro' href="http://fr.investing.com/currencies/btc-eur" target=_blank><?php echo 'BTC/'.$_SESSION["btceuro"].' €'; if($_SESSION["btceuro"]>$_SESSION["btceuroLast"]){ echo ' +';}else{ echo ' -';} ?></a></li>
+      <li><a class='btcdollars' href="http://fr.investing.com/currencies/btc-usd" target=_blank><?php echo 'BTC/'.$_SESSION["btcdollars"].' $'; if($_SESSION["btcdollars"]>$_SESSION["btcdollarsLast"]){ echo ' +';}else{ echo ' -';} ?></a></li>
 <?php 
    if ($handle = opendir('plugins/api_menu/')) {
         while (false !== ($entry = readdir($handle))) {
