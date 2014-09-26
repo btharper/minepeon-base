@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<xml>
+#use in index.php for displaying webcam tag and edit in settings.php
+<DisplayWebcam>1</DisplayWebcam>#1 = on ; 0 = off
+<SkinChooseByUser>bitecoin</SkinChooseByUser>
+<SkinList>
+        <skin>default</skin>
+        <skin>bitecoin</skin>
+        <skin>blackskin</skin>
+        <skin>fractalDemonix</skin>
+        <skin>freedom</skin>
+        <skin>gold</skin>
+</SkinList>
+<trade>
+	<euro>0</euro>
+	<dollars>0</dollars>
+</trade>
+</xml>
