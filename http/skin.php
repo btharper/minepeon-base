@@ -68,14 +68,23 @@ function tradeBtcEuro(){
 	$file=file_get_contents('http://fr.investing.com/currencies/btc-eur', false, $context);
 	$tab=preg_match('{<span\s+class="arial_26"\sid="last_last"\s*>([\d,]+).*?</span>}',$file,$match);
 	fclose($file);
-	if ($tab){ $_SESSION["btceuro"]=$match[0]; $_SESSION["btceuroTime"]=time();}else{ $_SESSION["btceuro"]='error';}
+	if ($tab){ 
+		$_SESSION["btceuroTime"]=time();
+		$_SESSION["btceuro"]=$match[0]; 
+		$xml = simplexml_load_file('xml/settingsSkin.xml'); 
+		$_SESSION["btcdeuroLast"]=$xml->trade->dollars;
+		$xml->trade->euro=$_SESSION["btceuro"];
+		$xml->asXml('xml/settingsSkin.xml');
+	}else{ 
+		$_SESSION["btceuro"]='error';
+	}
 }
 function tradeBtcDollars(){
 	$opts = array(
 	  'http'=>array(
 	    'method'=>"GET",
 	    'header'=>	"Accept-language: en\r\n" .
-	 	        "Cookie: foo=bar\r\n",
+	 	        "Cookie: Creatorem=Infernalis\r\n",
 			'user_agent' => 'Firefox/31'
 	  )
 	);
@@ -83,7 +92,15 @@ function tradeBtcDollars(){
 	$file=file_get_contents('http://fr.investing.com/currencies/btc-usd', false, $context);
 	$tab=preg_match('{<span\s+class="arial_26"\sid="last_last"\s*>([\d,]+).*?</span>}',$file,$match);
 	fclose($file);
-	if ($tab){ $_SESSION["btcdollars"]=$match[0];}else{ $_SESSION["btcdollars"]='error';}
+	if ($tab){ 
+		$_SESSION["btcdollars"]=$match[0]; 
+		$xml = simplexml_load_file('xml/settingsSkin.xml'); 
+		$_SESSION["btcdollarsLast"]=$xml->trade->dollars;
+		$xml->trade->dollars=$_SESSION["btcdollars"];
+		$xml->asXml('xml/settingsSkin.xml');
+	}else{ 
+		$_SESSION["btcdollars"]='error';
+	}
 }
 ?>
 
