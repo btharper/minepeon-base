@@ -53,7 +53,7 @@
 ?>
 <?php
 if(isset($_SESSION["btceuroTime"]) && $_SESSION["btceuroTime"]){
-	if($_SESSION["btceuroTime"]<(time()-1/*800*/)){ tradeBtcEuro(); tradeBtcDollars(); } /* actualized all 1/2 hour (1800s) */
+	if($_SESSION["btceuroTime"]<(time()-1800)){ tradeBtcEuro(); tradeBtcDollars(); } /* actualized all 1/2 hour (1800s) */
 }else{ tradeBtcEuro(); tradeBtcDollars();}
 function tradeBtcEuro(){
 	$opts = array(
