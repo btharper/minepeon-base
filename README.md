@@ -2,9 +2,13 @@ minepeon-base (VoxDemonix Edition)
 =============
 
 Add News Options: 
+
 -> Webcam Dispay On/Off on index's page (via settings.php)
+
 -> Choose Skin (settings.php)
+
 -> Save option in xml file can be read by a human (/opt/minepeon/http/xml/settingsSkin.xml)
+
 -> Display BTC/Euro/Dollars comparaison to menu (the function is in skin.php and use in menu.php and index.php)
 
 
@@ -14,6 +18,7 @@ Add a option for can lunch/stop the webcam
 
 #Depencance:
 If you want can use the webcam you need install "motion":
+
 └─ $ ▶ sudo pacman -S motion
 
 the following line creat the config file
