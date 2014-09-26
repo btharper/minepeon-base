@@ -66,10 +66,9 @@ function tradeBtcEuro(){
 	);
 	$context = stream_context_create($opts);
 	$file=file_get_contents('http://fr.investing.com/currencies/btc-eur', false, $context);
-	//$tab=preg_match('{<span\s+class="arial_26"\sid="last_last"\s*>([\d,]+).*?</span>}',$file,$match);
-$tab=preg_match('|<span\s+class="arial_26"\sid="last_last"\s*>(.*)</span>|',$file,$match);
+	$verif=preg_match('|<span\s+class="arial_26"\sid="last_last"\s*>(.*)</span>|',$file,$match);
 	fclose($file);
-	if ($tab){ 
+	if ($verif){ 
 		$_SESSION["btceuroTime"]=time();
 		$_SESSION["btceuro"]=$match[1]; 
 		$xml = simplexml_load_file('xml/settingsSkin.xml'); 
@@ -91,10 +90,9 @@ function tradeBtcDollars(){
 	);
 	$context = stream_context_create($opts);
 	$file=file_get_contents('http://fr.investing.com/currencies/btc-usd', false, $context);
-	//$tab=preg_match('{<span\s+class="arial_26"\sid="last_last"\s*>([\d,]+).*?</span>}',$file,$match);
-	$tab=preg_match('|<span\s+class="arial_26"\sid="last_last"\s*>(.*)</span>|',$file,$match);
+	$verif=preg_match('|<span\s+class="arial_26"\sid="last_last"\s*>(.*)</span>|',$file,$match);
 	fclose($file);
-	if ($tab){ 
+	if ($verif){ 
 		$_SESSION["btcdollars"]=$match[1]; 
 		$xml = simplexml_load_file('xml/settingsSkin.xml'); 
 		$_SESSION["btcdollarsLast"]=$xml->trade->dollars;
