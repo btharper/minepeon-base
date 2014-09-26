@@ -13,7 +13,7 @@ Add News Options:
 
 
 For futur version:
-Add a option for can lunch/stop the webcam
+Add an option for can lunch/stop the webcam
 
 
 #Depencance:
