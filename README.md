@@ -12,11 +12,11 @@ For futur version:
 Add a option for can lunch/stop the webcam
 
 
-Depencance:
+#Depencance:
 If you want can use the webcam you need install "motion":
 └─ $ ▶ sudo pacman -S motion
 
-#the following line creat the config file
+the following line creat the config file
 └─ $ ▶ echo 'videodevice /dev/video0
 input 8
 start_motion_daemon=no
@@ -32,14 +32,13 @@ width 640
 height 480
 webcam_maxrate 25' > ~/motion/motion.config
 
-#For lunch the webcam open a screen
+For lunch the webcam open a screen
 └─ $ ▶ screen -R motion
-#Lunch the program
+Lunch the program
 └─ $ ▶ sudo motion -c ~/motion/motion.config
 
 
-
-MinePeonUser:
+#MinePeonUser:
 
 To make the MinePeon user;-
 
