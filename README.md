@@ -17,6 +17,7 @@ If you want can use the webcam you need install "motion":
 └─ $ ▶ sudo pacman -S motion
 
 the following line creat the config file
+
 └─ $ ▶ echo 'videodevice /dev/video0
 input 8
 start_motion_daemon=no
