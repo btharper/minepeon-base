@@ -39,7 +39,7 @@ webcam_maxrate 25' > ~/motion/motion.config
 
 
 
-
+MinePeonUser:
 
 To make the MinePeon user;-
 
