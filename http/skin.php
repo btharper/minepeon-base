@@ -53,7 +53,7 @@
 ?>
 <?php
 if(isset($_SESSION["btceuroTime"]) && $_SESSION["btceuroTime"]){
-	if($_SESSION["btceuroTime"]<(time()-1800)){ tradeBtcEuro(); tradeBtcDollars(); } /* actualized all 1/2 hour (1800s) */
+	if($_SESSION["btceuroTime"]<(time()-1/*800*/)){ tradeBtcEuro(); tradeBtcDollars(); } /* actualized all 1/2 hour (1800s) */
 }else{ tradeBtcEuro(); tradeBtcDollars();}
 function tradeBtcEuro(){
 	$opts = array(
@@ -66,13 +66,14 @@ function tradeBtcEuro(){
 	);
 	$context = stream_context_create($opts);
 	$file=file_get_contents('http://fr.investing.com/currencies/btc-eur', false, $context);
-	$tab=preg_match('{<span\s+class="arial_26"\sid="last_last"\s*>([\d,]+).*?</span>}',$file,$match);
+	//$tab=preg_match('{<span\s+class="arial_26"\sid="last_last"\s*>([\d,]+).*?</span>}',$file,$match);
+$tab=preg_match('|<span\s+class="arial_26"\sid="last_last"\s*>(.*)</span>|',$file,$match);
 	fclose($file);
 	if ($tab){ 
 		$_SESSION["btceuroTime"]=time();
-		$_SESSION["btceuro"]=$match[0]; 
+		$_SESSION["btceuro"]=$match[1]; 
 		$xml = simplexml_load_file('xml/settingsSkin.xml'); 
-		$_SESSION["btcdeuroLast"]=$xml->trade->dollars;
+		$_SESSION["btceuroLast"]=$xml->trade->dollars;
 		$xml->trade->euro=$_SESSION["btceuro"];
 		$xml->asXml('xml/settingsSkin.xml');
 	}else{ 
@@ -90,10 +91,11 @@ function tradeBtcDollars(){
 	);
 	$context = stream_context_create($opts);
 	$file=file_get_contents('http://fr.investing.com/currencies/btc-usd', false, $context);
-	$tab=preg_match('{<span\s+class="arial_26"\sid="last_last"\s*>([\d,]+).*?</span>}',$file,$match);
+	//$tab=preg_match('{<span\s+class="arial_26"\sid="last_last"\s*>([\d,]+).*?</span>}',$file,$match);
+	$tab=preg_match('|<span\s+class="arial_26"\sid="last_last"\s*>(.*)</span>|',$file,$match);
 	fclose($file);
 	if ($tab){ 
-		$_SESSION["btcdollars"]=$match[0]; 
+		$_SESSION["btcdollars"]=$match[1]; 
 		$xml = simplexml_load_file('xml/settingsSkin.xml'); 
 		$_SESSION["btcdollarsLast"]=$xml->trade->dollars;
 		$xml->trade->dollars=$_SESSION["btcdollars"];
