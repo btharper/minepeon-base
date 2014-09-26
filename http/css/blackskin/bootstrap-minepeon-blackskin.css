@@ -272,4 +272,5 @@ a:hover {
 .form-webcam-bouton{ border: 1px dashed;}
 .form-webcam-bouton:hover{ text-shadow:#001 -1px 1px 0px; }
 .formWebcamSelected{ background-color: orange; }
-
+.bitecoinCompareMenuPlus{font-weight: bold; color: green;}
+.bitecoinCompareMenuMinus{font-weight: bold; color: red;}
