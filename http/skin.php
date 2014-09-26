@@ -102,10 +102,7 @@ function tradeBtcDollars(){
 		$_SESSION["btcdollars"]='error';
 	}
 }
-?>
 
-
-<?php
 //reception of form (settings.php)
 function webcamChooseDisplay(){
 		$_SESSION["webcam"] = -1;
