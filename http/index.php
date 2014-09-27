@@ -4,11 +4,12 @@ require('miner.inc.php');
 include('functions.inc.php');
 include('settings.inc.php');
 
-create_graph("mhsav-hour.png", "-1h", "Last Hour");
-create_graph("mhsav-day.png", "-1d", "Last Day");
-create_graph("mhsav-week.png", "-1w", "Last Week");
-create_graph("mhsav-month.png", "-1m", "Last Month");
-create_graph("mhsav-year.png", "-1y", "Last Year");
+// TEMPORARILY BLOCKS INCOMPATIBILITY WITH UPDATE OF ArchLinux
+//create_graph("mhsav-hour.png", "-1h", "Last Hour");
+//create_graph("mhsav-day.png", "-1d", "Last Day");
+//create_graph("mhsav-week.png", "-1w", "Last Week");
+//create_graph("mhsav-month.png", "-1m", "Last Month");
+//create_graph("mhsav-year.png", "-1y", "Last Year");
 
 function create_graph($output, $start, $title) {
   $RRDPATH = '/opt/minepeon/var/rrd/';
@@ -22,7 +23,7 @@ function create_graph($output, $start, $title) {
     "CDEF:realspeed=hashrate,1000,*",
     "LINE2:realspeed#FF0000"
     );
-
+//THIS next LINE DON'T LIKE THE UPDATE 
   $ret = rrd_graph("/opt/minepeon/http/rrd/" . $output, $options);
   if (! $ret) {
     //echo "<b>Graph error: </b>".rrd_error()."\n";
