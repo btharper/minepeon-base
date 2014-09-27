@@ -21,6 +21,9 @@ If you want can use the webcam you need install "motion":
 
 └─ $ ▶ sudo pacman -S motion
 
+Creat the folder
+└─ $ ▶ mkdir ~/motion
+
 the following line creat the config file
 
 └─ $ ▶ echo 'videodevice /dev/video0
