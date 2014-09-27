@@ -1,4 +1,4 @@
-minepeon-base
+minepeon-base (VoxDemonix Edition)
 =============
 
 Add News Options: 
