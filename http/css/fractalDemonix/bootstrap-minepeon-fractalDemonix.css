@@ -275,6 +275,9 @@ a:hover {
 .error_red {  color: rgb(255,0,0); font-weight: bold; }
 .alive {color: rgb(255,227,71);font-weight: bold;}
 #form-webcam{ width:40%; overflow:hidden; margin: auto; text-align:center; display:table-cell;}
+.bitecoinCompareMenuEgal{font-weight: bold; color: blue;}
+#voxedition{font-size:80%; color: #F0C300; text-shadow: #AD390E -1px 1px 0px;}
+#voxedition:hover{color: #FF390E; text-shadow: #F0C300 -1px 1px 10px; transition: 2s;}
 #form-webcam-on{float: left; }
 #form-webcam-off{float: right; }
 .form-webcam-bouton{ border: 1px dashed;}
