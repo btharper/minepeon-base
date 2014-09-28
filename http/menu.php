@@ -12,7 +12,7 @@ include("lang/en/lang.en.php");
   
 <div class="navbar navbar-default">
 <div class="container">
-    <a class="navbar-brand" href="http://mineforeman.com/minepeon/"><small>Beta </small>MinePeon</a>
+    <a class="navbar-brand" href="http://mineforeman.com/minepeon/">MinePeon<span id="voxedition"> VoxEdition</span></a>
     <ul class="nav navbar-nav">
       <li><a href="/"><?php echo $lang["status"]; ?></a></li>
       <li><a href="/pools.php"><?php echo $lang["pools"]; ?></a></li>
