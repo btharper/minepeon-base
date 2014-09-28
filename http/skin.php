@@ -52,9 +52,21 @@
         }
 ?>
 <?php
-if(isset($_SESSION["btceuroTime"]) && $_SESSION["btceuroTime"]){
-	if($_SESSION["btceuroTime"]<(time()-1800)){ tradeBtcEuro(); tradeBtcDollars(); } /* actualized all 1/2 hour (1800s) */
-}else{ tradeBtcEuro(); tradeBtcDollars();}
+$tmp = simplexml_load_file('xml/settingsSkin.xml'); $_SESSION["btcUpdateTime"]=$tmp->trade->update;
+if(intval($_SESSION["btcUpdateTime"])<intval(time())-1800){
+/* actualized all 1/2 hour (1800s) */ 
+	tradeBtcEuro(); tradeBtcDollars(); 
+	$_SESSION["btcUpdateTime"]=time();
+	$tmp = simplexml_load_file('xml/settingsSkin.xml');
+	$tmp->trade->update=$_SESSION["btcUpdateTime"];
+	$tmp->asXml('xml/settingsSkin.xml');
+}else{
+	$_SESSION["btceuro"]=floatval($tmp->trade->euro);
+	$_SESSION["btceuroLast"]=floatval($tmp->trade->euro_last);
+	$_SESSION["btcdollars"]=floatval($tmp->trade->dollars);
+	$_SESSION["btcdollarsLast"]=floatval($tmp->trade->dollars_last);
+}
+
 function tradeBtcEuro(){
 	$opts = array(
 	  'http'=>array(
@@ -69,9 +81,9 @@ function tradeBtcEuro(){
 	$verif=preg_match('|<span\s+class="arial_26"\sid="last_last"\s*>(.*)</span>|',$file,$match);
 	fclose($file);
 	if ($verif){ 
-		$_SESSION["btceuroTime"]=time();
 		$_SESSION["btceuro"]=$match[1]; 
 		$xml = simplexml_load_file('xml/settingsSkin.xml'); 
+		$xml->trade->euro_last=$xml->trade->euro;
 		$_SESSION["btceuroLast"]=floatval($xml->trade->euro);
 		$xml->trade->euro=$_SESSION["btceuro"];
 		$xml->asXml('xml/settingsSkin.xml');
@@ -95,6 +107,7 @@ function tradeBtcDollars(){
 	if ($verif){ 
 		$_SESSION["btcdollars"]=$match[1]; 
 		$xml = simplexml_load_file('xml/settingsSkin.xml'); 
+		$xml->trade->dollars_last=$xml->trade->dollars;
 		$_SESSION["btcdollarsLast"]=floatval($xml->trade->dollars);
 		$xml->trade->dollars=$_SESSION["btcdollars"];
 		$xml->asXml('xml/settingsSkin.xml');
