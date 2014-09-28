@@ -72,7 +72,7 @@ function tradeBtcEuro(){
 		$_SESSION["btceuroTime"]=time();
 		$_SESSION["btceuro"]=$match[1]; 
 		$xml = simplexml_load_file('xml/settingsSkin.xml'); 
-		$_SESSION["btceuroLast"]=intval($xml->trade->dollars);
+		$_SESSION["btceuroLast"]=floatval($xml->trade->euro);
 		$xml->trade->euro=$_SESSION["btceuro"];
 		$xml->asXml('xml/settingsSkin.xml');
 	}else{ 
@@ -95,7 +95,7 @@ function tradeBtcDollars(){
 	if ($verif){ 
 		$_SESSION["btcdollars"]=$match[1]; 
 		$xml = simplexml_load_file('xml/settingsSkin.xml'); 
-		$_SESSION["btcdollarsLast"]=intval($xml->trade->dollars);
+		$_SESSION["btcdollarsLast"]=floatval($xml->trade->dollars);
 		$xml->trade->dollars=$_SESSION["btcdollars"];
 		$xml->asXml('xml/settingsSkin.xml');
 	}else{ 
