@@ -12,7 +12,10 @@
         <skin>gold</skin>
 </SkinList>
 <trade>
-	<euro>0</euro>
-	<dollars>0</dollars>
+	<euro>310,00</euro>
+	<euro_last>310,00</euro_last>
+	<dollars>379,64</dollars>
+	<dollars_last>380,83</dollars_last>
+	<update>1411919152</update>
 </trade>
 </xml>
