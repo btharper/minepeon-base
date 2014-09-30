@@ -3,10 +3,10 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>MinePeon, from MineForeman</title>
+  <title>MinePeon,VoxDemonix Edition</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
-  <meta name="author" content="">
+  <meta name="author" content="Linux's Community">
   <meta http-equiv="refresh" content="600">
 <?php echo skinDisplay(); //skin.php
 /*  <link href="/css/bootstrap.min.css" rel="stylesheet">
