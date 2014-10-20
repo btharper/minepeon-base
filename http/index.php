@@ -5,6 +5,7 @@ include('functions.inc.php');
 include('settings.inc.php');
 
 // TEMPORARILY BLOCKS INCOMPATIBILITY WITH UPDATE OF ArchLinux
+// FIX with http://minepeon.com/forums/viewtopic.php?f=19&t=1756&p=8427#p8427
 //create_graph("mhsav-hour.png", "-1h", "Last Hour");
 //create_graph("mhsav-day.png", "-1d", "Last Day");
 //create_graph("mhsav-week.png", "-1w", "Last Week");
