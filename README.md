@@ -27,6 +27,7 @@ Creat the folder
 the following line creat the config file
 
 └─ $ ▶ nano ~/motion/motion.config
+
 And drop the following line in the motion.config file (one command peer line)
 
 videodevice /dev/video0
