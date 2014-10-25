@@ -26,7 +26,10 @@ Creat the folder
 
 the following line creat the config file
 
-└─ $ ▶ echo 'videodevice /dev/video0
+└─ $ ▶ nano ~/motion/motion.config
+And drop the following line in the motion.config file
+
+videodevice /dev/video0
 input 8
 start_motion_daemon=no
 webcam_localhost off
@@ -39,7 +42,7 @@ output_normal off
 webcam_port 6881
 width 640
 height 480
-webcam_maxrate 25' > ~/motion/motion.config
+webcam_maxrate 25
 
 For lunch the webcam open a screen
 └─ $ ▶ screen -R motion
