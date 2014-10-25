@@ -30,17 +30,29 @@ the following line creat the config file
 And drop the following line in the motion.config file (one command peer line)
 
 videodevice /dev/video0
+
 input 8
+
 start_motion_daemon=no
+
 webcam_localhost off
+
 quiet on
+
 post_capture 0
+
 output_all off
+
 control_localhost off
+
 output_normal off
+
 webcam_port 6881
+
 width 640
+
 height 480
+
 webcam_maxrate 25
 
 For lunch the webcam open a screen
