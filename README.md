@@ -27,7 +27,7 @@ Creat the folder
 the following line creat the config file
 
 └─ $ ▶ nano ~/motion/motion.config
-And drop the following line in the motion.config file
+And drop the following line in the motion.config file (one command peer line)
 
 videodevice /dev/video0
 input 8
@@ -38,7 +38,6 @@ post_capture 0
 output_all off
 control_localhost off
 output_normal off
-
 webcam_port 6881
 width 640
 height 480
