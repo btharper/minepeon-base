@@ -55,9 +55,14 @@ height 480
 
 webcam_maxrate 25
 
+
+
 For lunch the webcam open a screen
+
 └─ $ ▶ screen -R motion
+
 Lunch the program
+
 └─ $ ▶ sudo motion -c ~/motion/motion.config
 
 
