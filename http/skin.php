@@ -26,7 +26,7 @@
 			#open file
 		$databrute = simplexml_load_file("xml/settingsSkin.xml");
 				foreach($databrute->SkinList->skin as $skin){ 
-					if ($skin == $databrute->SkinChooseByUser){$selected="selected";}else{$selected="";} 
+					if ($skin == strval($databrute->SkinChooseByUser))){$selected="selected";}else{$selected="";} 
 					$formulaire.='<option value="'.$skin.'" '.$selected.'>'.$skin.'</option>';
 				}
 	          $formulaire.='</select>'.
