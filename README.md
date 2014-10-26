@@ -17,13 +17,19 @@ http://minepeon.com/forums/viewtopic.php?f=19&t=1756&p=8427#p8427
 
 Official url: 
   http://minepeon.com/forums/viewtopic.php?f=19&t=1756
+  
   https://hnokrjnlzme4v5yv.onion/forum/viewtopic.php?f=13&t=6&p=7
   
 How to install:
+
   └─ $ ▶ rm /opt/minepeon/bin/bitstreams/README
+  
   └─ $ ▶ cd /opt/minepeon
+  
   └─ $ ▶ git rm --cached -r .
+  
   └─ $ ▶ git reset --hard
+  
   └─ $ ▶ git pull https://github.com/voxdemonix/minepeon-base.git
 
 
