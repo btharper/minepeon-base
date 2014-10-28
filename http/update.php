@@ -10,8 +10,9 @@ login_check("quick");
 <html>
   <head>
     <title>Updating System</title>
-  <link href="/css/bootstrap.min.css" rel="stylesheet">
-  <link href="/css/bootstrap-minepeon.css" rel="stylesheet">
+    <?php include_once('./skin.php'); echo skinDisplay(); ?>
+<!--  <link href="/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/css/bootstrap-minepeon.css" rel="stylesheet"> -->
         <style>
    html, body {
             height: 100%;
