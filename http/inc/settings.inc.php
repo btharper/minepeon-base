@@ -25,10 +25,10 @@ function writeSettings($settings, $file = 'minepeon.conf') {
 
 
 
-$plea = '
+$plea = '';/*
 <hr />
 <h3>Plea</h3>
 <p>Please reconsider your decision to give back absolutely nothing to the project that is currently running your miners. A lot of time and effort has gone into making MinePeon what it is today and a small token of 15 minutes of your hash power would be greatly appreciated and will continue to fund the ongoing development and support of MinePeon.  </p>
 <p>It is such a small amount and well below the normal variance in bitcoin mining you will not even notice the difference. If you work it out for every 1 GH/s you have it is 0.00027 bitcoin a day, ask yourself, is that really too much to support MinePeon?</p>
-<p>Some of the features that I would like to include are;-</p>';
+<p>Some of the features that I would like to include are;-</p>';*/
 ?>
