@@ -2,7 +2,6 @@
 
 require_once('settings.inc.php');
 require_once('miner.inc.php');
-
  
 // Check for settings to write and do it after all checks
 $writeSettings=false;
@@ -405,6 +404,41 @@ include('menu.php');
             <div class="input-group">
               <input type="number" value="<?php echo $settings['donateAmount'] ?>" placeholder="Donation minutes" id="donateAmount" name="donateAmount" class="form-control">
               <span class="input-group-addon">minutes per day</span>
+<?php
+//vox addition now you can choose for who contrib when you want
+echo displayContributorChoice();
+receptionContributorChoice();
+function displayContributorChoice(){
+	$file = simplexml_load_file('/opt/minepeon/http/xml/settingsContrib.xml');
+	$construction = '<select name="contributor" class="form-control">';
+	$construction .= '<option value="all" ';
+	if(strval($file->contribForceSupport) == '0'){$construction .= 'selected ';} 
+	$construction .= '>all contributor (one peer day)</option>';
+	foreach($file->contribList->contributor as $contrib){ 
+		$selected = ''; if (strval($file->contribForceSupport) == '1' && strval($file->contribLastSupport) == strval($contrib)){ $selected = 'selected'; } 
+		$construction.='<option value="'.$contrib.'" '.$selected.'>'.$contrib.'</option>';	
+	}
+	$construction .= '</select>';
+	return $construction;
+}
+
+function receptionContributorChoice(){
+	if (!empty($_POST['contributor'])){
+		$xml = simplexml_load_file('/opt/minepeon/http/xml/settingsContrib.xml');
+		if($_POST['contributor']=='all'){ 
+			$xml->contribForceSupport=0; 
+		}else{ 
+			foreach($xml->contribList->contributor as $list){ 
+				$list=strval($list);
+				if(strval($_POST['contributor'])==$list){
+					$xml->contribForceSupport=1; $xml->contribLastSupport=$list; 
+				} 
+			}
+		}
+		$xml->asXml('/opt/minepeon/http/xml/settingsContrib.xml');
+	}
+}
+?>
             </div>
           </div>
         </div>
@@ -441,24 +475,6 @@ include('menu.php');
       </div>
     </fieldset>
   </form>
-<?php
- echo skinChoose(); //skin.php
-webcamChooseDisplay(); //skin.php
-?>
-<!--Form for choose if Display Webcam or not -->
-<?php $settingsSkin=simplexml_load_file("xml/settingsSkin.xml"); $formWebcamSelected=array('',''); switch($settingsSkin->DisplayWebcam){case "0": $formWebcamSelected[0]="formWebcamSelected"; break; case "1":$formWebcamSelected[1]="formWebcamSelected";break;} ?>
-<span class="form-horizontal" id="form-webcam"> <legend>Display Webcam</legend>
-<form name="webcamDisplayOn" action="/settings.php" method="post" id="form-webcam-on">
-<input type="hidden" name="webcamON" value="1">
-<input type="submit" value="ON" id="formWebcamON" class="form-webcam-bouton <?php echo $formWebcamSelected[1]; ?>";>
-</form> <~~~~>
-<form name="webcamDisplayOFF" action="/settings.php" method="post" id="form-webcam-off">
-<input type="hidden" name="webcamOFF" value="1">
-<input type="submit" value="OFF" id="formWebcamOFF" class="form-webcam-bouton <?php echo $formWebcamSelected[0]; ?>";>
-</form>
-</span>
-<!-- END Form for choose if Display Webcam or not -->
-
 <script type="text/javascript" id="js">
   function checkPass()
 {
