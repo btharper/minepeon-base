@@ -475,6 +475,23 @@ function receptionContributorChoice(){
       </div>
     </fieldset>
   </form>
+<?php
+echo skinChoose(); //skin.php
+webcamChooseDisplay(); //skin.php
+?>
+<!--Form for choose if Display Webcam or not -->
+<?php $settingsSkin=simplexml_load_file("xml/settingsSkin.xml"); $formWebcamSelected=array('',''); switch($settingsSkin->DisplayWebcam){case "0": $formWebcamSelected[0]="formWebcamSelected"; break; case "1":$formWebcamSelected[1]="formWebcamSelected";break;} ?>
+<span class="form-horizontal" id="form-webcam"> <legend>Display Webcam</legend>
+<form name="webcamDisplayOn" action="/settings.php" method="post" id="form-webcam-on">
+<input type="hidden" name="webcamON" value="1">
+<input type="submit" value="ON" id="formWebcamON" class="form-webcam-bouton <?php echo $formWebcamSelected[1]; ?>";>
+</form> <~~~~>
+<form name="webcamDisplayOFF" action="/settings.php" method="post" id="form-webcam-off">
+<input type="hidden" name="webcamOFF" value="1">
+<input type="submit" value="OFF" id="formWebcamOFF" class="form-webcam-bouton <?php echo $formWebcamSelected[0]; ?>";>
+</form>
+</span>
+<!-- END Form for choose if Display Webcam or not -->
 <script type="text/javascript" id="js">
   function checkPass()
 {
