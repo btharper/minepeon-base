@@ -81,7 +81,7 @@ echo '<script language="javascript"
 
 if ($error == "yes"){
     echo '<script language="javascript">
-    document.getElementById("update").innerHTML="<p>Error... Try agian</p>";
+    document.getElementById("update").innerHTML="<p>Error... Try again</p>";
     document.getElementById("image").innerHTML="<img src=\'/img/error.gif\' width=\'42\' height=\'42\'>";
     </script>';
 }else{
