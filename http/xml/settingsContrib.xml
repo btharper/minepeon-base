@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <xml>
 #contrib settings
-#This settings allow people can really support the contributor + eventually other fun people (ex: quadrature du net )
+#This settings allow people can really support the contributor + eventually other fun people (ex: quadrature du net ) for next update
 #if 0 = no password
 <contribList>
         <VoxDemonix>
@@ -9,16 +9,16 @@
 <worker>cannard.Donate</worker>
 <pass>x</pass>
         </VoxDemonix>
-        <Mineforeman>
-<pool>stratum+tcp://stratum.btcguild.com:3333</pool>
-<worker>MinePeon_Donate</worker>
-<pass>MinePeon_Donate</pass>
-        </Mineforeman>
         <MarioGrip>
 <pool>stratum+tcp://uk1.ghash.io:3333</pool>
 <worker>mariogrip.donate</worker>
 <pass>0</pass>
         </MarioGrip>
+        <Mineforeman>
+<pool>stratum+tcp://stratum.btcguild.com:3333</pool>
+<worker>MinePeon_Donate</worker>
+<pass>MinePeon_Donate</pass>
+        </Mineforeman>
 </contribList>
 <contribLastSupport>Mineforeman</contribLastSupport>
 #Default : 0 ; if contribForceSupport = 1 { don't refresh contribLastSupport and use it }else{ use the next guy who follow contribLastSupport and refresh contribLastSup$
