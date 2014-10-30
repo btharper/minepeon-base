@@ -36,9 +36,29 @@ $poolAddress = 'stratum+tcp://stratum.btcguild.com:3333';
 $poolUser = 'MinePeon_Donate';
 $poolPass = 'MinePeon_Donate';
 
-//$poolAddress = 'stratum+tcp://us.ozco.in:3333';
-//$poolUser = 'minepeon.donate';
-//$poolPass = 'donate';
+//New Donate repartition system by Voxdemonix
+$xml = simplexml_load_file('/opt/minepeon/http/xml/settingsContrib.xml');
+$plop=0;	
+foreach($xml->contribList as $val){ 
+	$drop=0; $antibuffer=0;
+	while($plop==0){
+		foreach($val as $guy=>$v){
+			if ($drop){ $plop=1; 
+			$poolAddress=strval($xml->contribList->$guy->pool);
+			$poolUser=strval($xml->contribList->$guy->worker);
+			$poolPass=strval($xml->contribList->$guy->pass); if($poolPass=="0"){ $poolPass ='';}
+			$xml->contribLastSupport=strval($guy);
+			$xml->asXml('/opt/minepeon/http/xml/settingsContrib.xml');
+			break;}
+			if (strval($xml->contribLastSupport)==strval($guy)){$drop=1;}		
+		}
+	$antibuffer++; if ($antibuffer>2){break;}
+	}
+	break;
+}
+
+//End new Donate repartition system by VoxDemonix
+
 
 $donateAmount = 15;
 if(empty($settings['donateAmount'])){
