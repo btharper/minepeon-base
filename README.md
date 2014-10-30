@@ -11,6 +11,8 @@ Add News Options:
 
 -> Display BTC/Euro/Dollars comparaison to menu (the function is in skin.php and use in menu.php and index.php)
 
+-> Add option for can support other contributors
+
 
 For fix the graphic's bug:
 http://minepeon.com/forums/viewtopic.php?f=19&t=1756&p=8427#p8427
