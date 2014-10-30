@@ -2,28 +2,25 @@
 <xml>
 #contrib settings
 #This settings allow people can really support the contributor + eventually other fun people (ex: quadrature du net )
-<contribList>
-  <contributor>Mineforeman</contributor>
-  <contributor>MarioGrip</contributor>
-  <contributor>VoxDemonix</contributor>
-</contribList>
-<contribPools>
-  <Mineforeman>stratum+tcp://stratum.btcguild.com:3333</Mineforeman>
-  <MarioGrip>stratum+tcp://uk1.ghash.io:3333</MarioGrip>
-  <VoxDemonix>stratum+tcp://eu.multipool.us:9332</VoxDemonix>
-</contribPools>
-<contribWorker>
-  <Mineforeman>MinePeon_Donate</Mineforeman>
-  <MarioGrip>mariogrip.donate</MarioGrip>
-  <VoxDemonix>cannard.Donate</VoxDemonix>
-</contribWorker>
-<contribWorkerPass>
 #if 0 = no password
-  <Mineforeman>MinePeon_Donate</Mineforeman>
-  <MarioGrip>0</MarioGrip>
-  <VoxDemonix>0</VoxDemonix>
-</contribWorkerPass>
+<contribList>
+        <VoxDemonix>
+<pool>stratum+tcp://eu.multipool.us:9332</pool>
+<worker>cannard.Donate</worker>
+<pass>0</pass>
+        </VoxDemonix>
+        <Mineforeman>
+<pool>stratum+tcp://stratum.btcguild.com:3333</pool>
+<worker>MinePeon_Donate</worker>
+<pass>MinePeon_Donate</pass>
+        </Mineforeman>
+        <MarioGrip>
+<pool>stratum+tcp://uk1.ghash.io:3333</pool>
+<worker>mariogrip.donate</worker>
+<pass>0</pass>
+        </MarioGrip>
+</contribList>
 <contribLastSupport>Mineforeman</contribLastSupport>
-#Default : 0 ; if contribForceSupport = 1 { don't refresh contribLastSupport and use it }else{ use the next guy who follow contribLastSupport and refresh contribLastSupport }
+#Default : 0 ; if contribForceSupport = 1 { don't refresh contribLastSupport and use it }else{ use the next guy who follow contribLastSupport and refresh contribLastSup$
 <contribForceSupport>0</contribForceSupport>
 </xml>
