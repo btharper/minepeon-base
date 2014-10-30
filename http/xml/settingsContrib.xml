@@ -7,7 +7,7 @@
         <VoxDemonix>
 <pool>stratum+tcp://eu.multipool.us:9332</pool>
 <worker>cannard.Donate</worker>
-<pass>0</pass>
+<pass>x</pass>
         </VoxDemonix>
         <Mineforeman>
 <pool>stratum+tcp://stratum.btcguild.com:3333</pool>
