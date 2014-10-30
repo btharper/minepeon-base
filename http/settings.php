@@ -412,15 +412,19 @@ function displayContributorChoice(){
 	$file = simplexml_load_file('/opt/minepeon/http/xml/settingsContrib.xml');
 	$construction = '<select name="contributor" class="form-control">';
 	$construction .= '<option value="all" ';
-	if(strval($file->contribForceSupport) == '0'){$construction .= 'selected ';} 
+	if(strval($file->contribForceSupport) == '0'){$construction .= 'selected ';}
 	$construction .= '>all contributor (one peer day)</option>';
-	foreach($file->contribList->contributor as $contrib){ 
-		$selected = ''; if (strval($file->contribForceSupport) == '1' && strval($file->contribLastSupport) == strval($contrib)){ $selected = 'selected'; } 
-		$construction.='<option value="'.$contrib.'" '.$selected.'>'.$contrib.'</option>';	
+	foreach($file->contribList as $val){
+		foreach($val as $contrib=>$v){
+		$contrib=strval($contrib);
+		$selected = ''; if (strval($file->contribForceSupport) == '1' && strval($file->contribLastSupport) == $contrib){ $selected = 'selected'; } 
+		$construction.='<option value="'.$contrib.'" '.$selected.'>'.$contrib.'</option>';
+		}
 	}
 	$construction .= '</select>';
 	return $construction;
 }
+
 
 function receptionContributorChoice(){
 	if (!empty($_POST['contributor'])){
@@ -428,10 +432,13 @@ function receptionContributorChoice(){
 		if($_POST['contributor']=='all'){ 
 			$xml->contribForceSupport=0; 
 		}else{ 
-			foreach($xml->contribList->contributor as $list){ 
-				$list=strval($list);
-				if(strval($_POST['contributor'])==$list){
-					$xml->contribForceSupport=1; $xml->contribLastSupport=$list; 
+			foreach($xml->contribList as $list){ 
+				foreach($list as $contrib=>$v){
+					$contrib=strval($contrib);
+					if(strval($_POST['contributor'])==$contrib){
+						$xml->contribForceSupport=1; 
+						$xml->contribLastSupport=$contrib; 
+					}				
 				} 
 			}
 		}
