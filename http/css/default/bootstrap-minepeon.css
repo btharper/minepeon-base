@@ -2,12 +2,11 @@
 /* Structure */
 body{
   padding-bottom: 50px;
-  background-image: url('/img/Abstract-Fractal-Wallpaper-Best.jpg');
   background-position: right bottom;
   background-repeat:no-repeat;
   background-attachment:fixed;
-  background-color:black;
-  color: white;
+  background-color:white;
+  color: black;
 }
 /* Navbar */
 .navbar-nav > li > a {
