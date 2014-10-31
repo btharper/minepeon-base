@@ -198,3 +198,12 @@ background: red;
 cursor: inherit;
 display: block;
 }
+.webcam { text-align:center; }
+.oeil{
+border:1px dashed green;
+border-top-color: rgb(255,227,71);
+border-left-color: rgb(255,227,71);
+border-top-left-radius: 15%;
+border-top-right-radius: 15%;
+border-bottom-left-radius: 15%;
+}
