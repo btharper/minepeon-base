@@ -14,9 +14,6 @@ Add News Options:
 -> Add option for can support other contributors
 
 
-For fix the graphic's bug:
-http://minepeon.com/forums/viewtopic.php?f=19&t=1756&p=8427#p8427
-
 #Official url: 
 
   http://minepeon.com/forums/viewtopic.php?f=19&t=1756
