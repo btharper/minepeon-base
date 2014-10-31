@@ -406,8 +406,8 @@ include('menu.php');
               <span class="input-group-addon">minutes per day</span>
 <?php
 //vox addition now you can choose for who contrib when you want
-echo displayContributorChoice();
 receptionContributorChoice();
+echo displayContributorChoice();
 function displayContributorChoice(){
 	$file = simplexml_load_file('/opt/minepeon/http/xml/settingsContrib.xml');
 	$construction = '<select name="contributor" class="form-control">';
