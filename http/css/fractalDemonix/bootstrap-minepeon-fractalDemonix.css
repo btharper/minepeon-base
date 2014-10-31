@@ -285,3 +285,6 @@ a:hover {
 .formWebcamSelected{ background-color: orange; }
 .bitecoinCompareMenuPlus{font-weight: bold; color: green;}
 .bitecoinCompareMenuMinus{font-weight: bold; color: red;}
+.input-group-addon:not(:first-child):not(:last-child), .input-group-btn:not(:first-child):not(:last-child), .input-group .form-control:not(:first-child):not(:last-child){
+color:black;
+}
