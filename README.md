@@ -86,6 +86,13 @@ Lunch the program
 └─ $ ▶ sudo motion -c ~/motion/motion.config
 
 
+#How to securise SSL (PODDLE):
+
+    sudo nano /etc/httpd/conf/extra/httpd-ssl.conf
+
+Write "SSLProtocol all -SSLv3" just after "SSLEngine on" and reboot.
+(source : https://hnokrjnlzme4v5yv.onion/joomla/index.php/fr/tout-les-articles-fr/7-mitm-sslv3-faille-poddle
+
 #MinePeonUser:
 
 To make the MinePeon user;-
