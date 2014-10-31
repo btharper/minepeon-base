@@ -28,10 +28,10 @@ if (!empty($settings['donateTime']) || $settings['donateTime'] != ""){
 if(empty($settings['donateEnable']) || !$settings['donateEnable']){
         exit;
 }
-/*
+
 if (date('G') <> $dTime) {
         exit;
-}  */
+} 
 /*
 $poolAddress = 'stratum+tcp://stratum.btcguild.com:3333';
 $poolUser = 'MinePeon_Donate';
