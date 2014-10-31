@@ -85,6 +85,8 @@ Lunch the program
 
 └─ $ ▶ sudo motion -c ~/motion/motion.config
 
+For qui screen without stop motion tape CTRL+A=>D
+
 
 #How to securise SSL (PODDLE):
 
