@@ -207,3 +207,9 @@ border-top-left-radius: 15%;
 border-top-right-radius: 15%;
 border-bottom-left-radius: 15%;
 }
+#form-webcam{ width:40%; overflow:hidden; margin: auto; text-align:center; display:table-cell;}
+#form-webcam-on{float: left; }
+#form-webcam-off{float: right; }
+.form-webcam-bouton{ border: 1px dashed;}
+.form-webcam-bouton:hover{ text-shadow:#001 -1px 1px 0px; }
+.formWebcamSelected{ background-color: orange; }
