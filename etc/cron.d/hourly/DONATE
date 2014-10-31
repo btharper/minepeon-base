@@ -1,6 +1,5 @@
 #!/usr/bin/php
 <?php
-
 include('miner.inc.php');
 include('settings.inc.php');
 
@@ -9,60 +8,70 @@ $bra = (string)$update->branch;
 $upd = (string)$update->version;
 $upf = str_replace("\n", '', file_get_contents('/opt/minepeon/etc/version'));
 if ($upd != $upf && $upd != ""){
-$settings['update'] = "true"; 
+$settings['update'] = "true";
 $settings['updatebranch'] = $bra;
 writeSettings($settings);
 }else{
-$settings['update'] = "false"; 
+$settings['update'] = "false";
 $settings['updatebranch'] = "null";
+$settings['donateTime']=12;
 writeSettings($settings);
 }
 
-if ($settings['donateTime'] != ""){
+if (!empty($settings['donateTime']) || $settings['donateTime'] != ""){
  $dTime = $settings['donateTime'];
 }else{
  $dTime = 12;
 }
 
 if(empty($settings['donateEnable']) || !$settings['donateEnable']){
-	exit;
+        exit;
 }
-
+/*
 if (date('G') <> $dTime) {
-	exit;
-}
-
+        exit;
+}  */
+/*
 $poolAddress = 'stratum+tcp://stratum.btcguild.com:3333';
 $poolUser = 'MinePeon_Donate';
 $poolPass = 'MinePeon_Donate';
-
+*/
 //New Donate repartition system by Voxdemonix
+$poolAddress=''; $poolUser=''; $poolPass=''; $guy='';
 $xml = simplexml_load_file('/opt/minepeon/http/xml/settingsContrib.xml');
-$plop=0;	
-foreach($xml->contribList as $val){ 
-	$drop=0; $antibuffer=0;
-	while($plop==0){
-		foreach($val as $guy=>$v){
-			if ($drop){ $plop=1; 
-			$poolAddress=strval($xml->contribList->$guy->pool);
-			$poolUser=strval($xml->contribList->$guy->worker);
-			$poolPass=strval($xml->contribList->$guy->pass); if($poolPass=="0"){ $poolPass ='';}
-			$xml->contribLastSupport=strval($guy);
-			$xml->asXml('/opt/minepeon/http/xml/settingsContrib.xml');
-			break;}
-			if (strval($xml->contribLastSupport)==strval($guy)){$drop=1;}		
-		}
-	$antibuffer++; if ($antibuffer>2){break;}
+$plop=0;
+if(strval($xml->contribForceSupport)=='0'){
+	//Support all contributor (one peer day)
+	foreach($xml->contribList as $val){
+        	$drop=0; $antibuffer=0;
+        	while($plop==0){
+        	        foreach($val as $guy=>$v){
+        	                if ($drop){ $plop=1;
+        	                $poolAddress=strval($xml->contribList->$guy->pool);
+        	                $poolUser=strval($xml->contribList->$guy->worker);
+        	                $poolPass=strval($xml->contribList->$guy->pass); if($poolPass=="0"){ $poolPass ='';}
+        	                $xml->contribLastSupport=strval($guy);
+        	                $xml->asXml('/opt/minepeon/http/xml/settingsContrib.xml');
+        	                break;}
+        	                if (strval($xml->contribLastSupport)==strval($guy)){$drop=1;}
+        	        }
+        	$antibuffer++; if ($antibuffer>2){break;}
+        	}
+        	break;
 	}
-	break;
+}else{
+	//Support only one contributor (actually bug)
+	$guy=strval($xml->contribLastSupport);
+	$poolAddress=strval($xml->contribList->$guy->pool);
+	$poolUser=strval($xml->contribList->$guy->worker);
+	$poolPass=strval($xml->contribList->$guy->pass); if($poolPass=="0"){ $poolPass ='';}
 }
-
 //End new Donate repartition system by VoxDemonix
 
 
 $donateAmount = 15;
 if(empty($settings['donateAmount'])){
-	$donateAmount = $settings['donateAmount'];
+        $donateAmount = $settings['donateAmount'];
 }
 
 $settings['donateActive'] = true;
@@ -102,5 +111,4 @@ function findDonatePool($addr){
   }
   return $donatePool;
 }
-
 ?>
