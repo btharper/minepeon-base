@@ -6,7 +6,7 @@
 			$file = simplexml_load_file('xml/settingsSkin.xml'); $_SESSION["skin"] = $file->SkinChooseByUser; 
 		}
 		/* css */
-		if ($_SESSION["skin"]=="default" || !$_SESSION["skin"]){
+		if (strval($_SESSION["skin"])=="default" || !$_SESSION["skin"]){
 			return '<link href="/css/default/bootstrap.min.css" rel="stylesheet"><link href="/css/default/bootstrap-minepeon.css" rel="stylesheet">';
 		}else{
 			return '<link href="/css/bootstrap.min-new.css" rel="stylesheet"><link href="/css/'.$_SESSION["skin"].'/bootstrap-minepeon-'.$_SESSION["skin"].'.css" rel="stylesheet">';}
