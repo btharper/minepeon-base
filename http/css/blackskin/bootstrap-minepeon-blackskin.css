@@ -277,3 +277,6 @@ a:hover {
 .bitecoinCompareMenuEgal{font-weight: bold; color: blue;}
 #voxedition{font-size:80%; color: #F0C300; text-shadow: #AD390E -1px 1px 0px;}
 #voxedition:hover{color: #FF390E; text-shadow: #F0C300 -1px 1px 10px; transition: 2s;}
+.input-group-addon:not(:first-child):not(:last-child), .input-group-btn:not(:first-child):not(:last-child), .input-group .form-control:not(:first-child):not(:last-child){
+color:black;
+}
