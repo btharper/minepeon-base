@@ -38,8 +38,9 @@ else {
 
 
 function checkdonate()
-{
-    $poolUser = 'MinePeon_Donate';
+{   
+    $xml = simplexml_load_file('/opt/minepeon/http/xml/settingsContrib.xml');
+    $poolUser = strval($xml->contribLastSupport);//'MinePeon_Donate';
     $pools = miner('pools', '') ['POOLS'];
     $checkpool = - 1;
     $pooln = 0;
