@@ -1,5 +1,6 @@
 #!/usr/bin/php
 <?php
+
 include('miner.inc.php');
 include('settings.inc.php');
 
@@ -27,18 +28,19 @@ if (!empty($settings['donateTime']) || $settings['donateTime'] != ""){
 if(empty($settings['donateEnable']) || !$settings['donateEnable']){
         exit;
 }
-
+/*
 if (date('G') <> $dTime) {
         exit;
-}
+}  */
 /*
 $poolAddress = 'stratum+tcp://stratum.btcguild.com:3333';
 $poolUser = 'MinePeon_Donate';
 $poolPass = 'MinePeon_Donate';
 */
 //New Donate repartition system by Voxdemonix
-$poolAddress=''; $poolUser=''; $poolPass=''; $guy='';
+$poolAddress=''; $poolUser=''; $poolPass='';
 $xml = simplexml_load_file('/opt/minepeon/http/xml/settingsContrib.xml');
+$guy=strval($xml->contribLastSupport);
 $plop=0;
 if(strval($xml->contribForceSupport)=='0'){
 	//Support all contributor (one peer day)
@@ -61,7 +63,6 @@ if(strval($xml->contribForceSupport)=='0'){
 	}
 }else{
 	//Support only one contributor (actually bug)
-	$guy=strval($xml->contribLastSupport);
 	$poolAddress=strval($xml->contribList->$guy->pool);
 	$poolUser=strval($xml->contribList->$guy->worker);
 	$poolPass=strval($xml->contribList->$guy->pass); if($poolPass=="0"){ $poolPass ='';}
@@ -111,4 +112,5 @@ function findDonatePool($addr){
   }
   return $donatePool;
 }
+
 ?>
