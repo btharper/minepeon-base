@@ -1,0 +1,90 @@
+    #!/usr/bin/python2
+
+    import json
+    import os
+    import os.path
+    import rrdtool
+    import socket
+    import sys
+    import time
+
+    GRAPH1 = '/opt/minepeon/http/rrd/mhsav-hour.png'
+    GRAPH2 = '/opt/minepeon/http/rrd/mhsav-day.png'
+    GRAPH3 = '/opt/minepeon/http/rrd/mhsav-week.png'
+    GRAPH4 = '/opt/minepeon/http/rrd/mhsav-month.png'
+    GRAPH5 = '/opt/minepeon/http/rrd/mhsav-year.png'
+    RRDFILE = '/opt/minepeon/var/rrd/hashrate.rrd'
+
+    if not os.path.isfile(RRDFILE) :
+        ret = rrdtool.create(RRDFILE, "--step", "300", "--start", "-12 months",
+         "DS:hashrate:GAUGE:600:0:U",
+         "RRA:AVERAGE:0.5:1:228",
+         "RRA:AVERAGE:0.5:12:168",
+         "RRA:AVERAGE:0.5:228:365")
+        if ret:
+            print rrdtool.error()
+
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock.connect(('localhost', 4028))
+
+    sock.send(json.dumps({'command': 'summary'}))
+
+    resp = ''
+    while 1:
+        buf = sock.recv(4096)
+        if buf:
+            resp += buf
+        else:
+            break
+
+    sock.shutdown(socket.SHUT_RDWR)
+    sock.close()
+
+    d = json.loads(resp[:-1])
+    list = d['SUMMARY']
+
+    dict = list[0]
+
+    ret = rrdtool.update(RRDFILE, 'N:' + str(int(dict.get('MHS av')*1000)))
+    if ret:
+        print rrdtool.error()
+
+    ret = rrdtool.graph(GRAPH1, "-E", "-s", "-1h", "-t", "Last Hour",
+      "-v", "Hash per second", "-l", "0",
+      "DEF:hashrate=" + RRDFILE + ":hashrate:AVERAGE",
+      "CDEF:realspeed=hashrate,1000,*",
+      "LINE2:realspeed#FF0000")
+    if ret:
+        print rrdtool.error()
+
+    ret = rrdtool.graph(GRAPH2, "-E", "-s", "-1d", "-t", "Last Day",
+      "-v", "Hash per second", "-l", "0",
+      "DEF:hashrate=" + RRDFILE + ":hashrate:AVERAGE",
+      "CDEF:realspeed=hashrate,1000,*",
+      "LINE2:realspeed#FF0000")
+    if ret:
+        print rrdtool.error()
+
+    ret = rrdtool.graph(GRAPH3, "-E", "-s", "-1w", "-t", "Last Week",
+      "-v", "Hash per second", "-l", "0",
+      "DEF:hashrate=" + RRDFILE + ":hashrate:AVERAGE",
+      "CDEF:realspeed=hashrate,1000,*",
+      "LINE2:realspeed#FF0000")
+    if ret:
+        print rrdtool.error()
+
+    ret = rrdtool.graph(GRAPH4, "-E", "-s", "-1m", "-t", "Last Month",
+      "-v", "Hash per second", "-l", "0",
+      "DEF:hashrate=" + RRDFILE + ":hashrate:AVERAGE",
+      "CDEF:realspeed=hashrate,1000,*",
+      "LINE2:realspeed#FF0000")
+    if ret:
+        print rrdtool.error()
+
+    ret = rrdtool.graph(GRAPH5, "-E", "-s", "-1y", "-t", "Last Year",
+      "-v", "Hash per second", "-l", "0",
+      "DEF:hashrate=" + RRDFILE + ":hashrate:AVERAGE",
+      "CDEF:realspeed=hashrate,1000,*",
+      "LINE2:realspeed#FF0000")
+    if ret:
+        print rrdtool.error()
