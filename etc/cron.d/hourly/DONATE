@@ -62,7 +62,7 @@ if(strval($xml->contribForceSupport)=='0'){
         	break;
 	}
 }else{
-	//Support only one contributor (actually bug)
+	//Support only one contributor
 	$poolAddress=strval($xml->contribList->$guy->pool);
 	$poolUser=strval($xml->contribList->$guy->worker);
 	$poolPass=strval($xml->contribList->$guy->pass); if($poolPass=="0"){ $poolPass ='';}
