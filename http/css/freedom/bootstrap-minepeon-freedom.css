@@ -28,7 +28,7 @@ body{
 }
 .navbar-nav > li > a:active, .navbar-nav > li > a:active{
   background: #fff;
-  background-image:url('/css/bitecoin/bitecoin-logo.png');
+  background-image:url('/css/freedom/Colombeinternet.jpg');
   background-position:center;
   background-repeat: no-repeat;
   transition: 1s;
