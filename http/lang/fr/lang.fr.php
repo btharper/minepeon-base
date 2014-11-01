@@ -1,6 +1,5 @@
 <?php
-//English
-//This is Work in progress!
+//French
 
 //Index
 
