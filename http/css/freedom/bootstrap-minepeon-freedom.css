@@ -18,7 +18,7 @@ body{
 }
 .navbar-nav > li > a:hover, .navbar-nav > li > a:focus{
   background: #fff;
-  background-image:url('/css/freedom/Colombe_internet.jpg');
+  background-image:url('/css/freedom/Colombeinternet.jpg');
   background-position:center;
   background-repeat: no-repeat;
   transition: 1s;
