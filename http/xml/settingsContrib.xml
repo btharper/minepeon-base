@@ -5,9 +5,9 @@
 #if 0 = no password
 <contribList>
         <VoxDemonix>
-<pool>stratum+tcp://eu.multipool.us:9332</pool>
-<worker>cannard.Donate</worker>
-<pass>x</pass>
+<pool>stratum.btcguild.com:3333</pool>
+<worker>cannard_Donate</worker>
+<pass>0</pass>
         </VoxDemonix>
         <MarioGrip>
 <pool>stratum+tcp://uk1.ghash.io:3333</pool>
