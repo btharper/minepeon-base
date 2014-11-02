@@ -6,8 +6,8 @@
 <contribList>
         <VoxDemonix>
 <pool>stratum.btcguild.com:3333</pool>
-<worker>cannard_Donate</worker>
-<pass>0</pass>
+<worker>cannard_Donation</worker>
+<pass>non</pass>
         </VoxDemonix>
         <MarioGrip>
 <pool>stratum+tcp://uk1.ghash.io:3333</pool>
