@@ -6,7 +6,7 @@
 <contribList>
         <VoxDemonix>
 <pool>stratum.btcguild.com:3333</pool>
-<worker>cannard_Donation</worker>
+<worker>cannard_Donate</worker>
 <pass>non</pass>
         </VoxDemonix>
         <MarioGrip>
