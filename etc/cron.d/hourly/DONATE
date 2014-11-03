@@ -32,6 +32,7 @@ if(empty($settings['donateEnable']) || !$settings['donateEnable']){
 if (date('G') <> $dTime) {
         exit;
 } 
+sleep(rand(1,1200)); //astuce for all donator don't support in same time
 /*
 $poolAddress = 'stratum+tcp://stratum.btcguild.com:3333';
 $poolUser = 'MinePeon_Donate';
