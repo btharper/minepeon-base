@@ -1,4 +1,5 @@
 #!/usr/bin/python2
+#this script need chmod 755 for can work
 
 import json
 import os
