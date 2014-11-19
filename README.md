@@ -20,6 +20,8 @@ Add News Options:
   
   https://hnokrjnlzme4v5yv.onion/forum/viewtopic.php?f=13&t=6&p=7
   
+  presentation page: https://hnokrjnlzme4v5yv.onion/minepeon/index.html
+  
 #How to install:
 
   └─ $ ▶ rm /opt/minepeon/bin/bitstreams/README
