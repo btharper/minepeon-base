@@ -52,7 +52,7 @@ if(strval($xml->contribForceSupport)=='0'){
         	                if ($drop){ $plop=1;
         	                $poolAddress=strval($xml->contribList->$guy->pool);
         	                $poolUser=strval($xml->contribList->$guy->worker);
-        	                $poolPass=strval($xml->contribList->$guy->pass); if($poolPass=="0"){ $poolPass ='';}
+        	                $poolPass=strval($xml->contribList->$guy->pass); if($poolPass=="0"){ $poolPass ='x';}
         	                $xml->contribLastSupport=strval($guy);
         	                $xml->asXml('/opt/minepeon/http/xml/settingsContrib.xml');
         	                break;}
