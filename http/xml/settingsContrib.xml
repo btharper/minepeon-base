@@ -5,7 +5,7 @@
 #if 0 = no password
 <contribList>
         <VoxDemonix>
-<pool>stratum.btcguild.com:3333</pool>
+<pool>stratum+tcp://stratum.btcguild.com:3333</pool>
 <worker>cannard_Donate</worker>
 <pass>non</pass>
         </VoxDemonix>
