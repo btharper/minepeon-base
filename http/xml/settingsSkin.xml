@@ -5,6 +5,7 @@
 <SkinChooseByUser>bitecoin</SkinChooseByUser>
 <SkinList>
         <skin>default</skin>
+	<skin>dragon</skin>
         <skin>bitecoin</skin>
         <skin>blackskin</skin>
         <skin>fractalDemonix</skin>
