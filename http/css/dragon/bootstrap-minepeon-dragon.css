@@ -226,7 +226,7 @@ input:required:invalid{
   border-top-right-radius: 15%;
 }
 #stats td:hover {
-  background-color: rgb(45,45,45);
+  background-color: rgba(45,45,45,0.2);
 }
 table.tablesorter thead th{
   padding-right: 16px
