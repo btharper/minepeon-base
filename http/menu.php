@@ -2,12 +2,23 @@
 if(!isset($settings['update'])) {
     $settings['update'] = false;
 }
-
-if ($settings['lang'] == "no"){
+//include the good language's file
+	if (isset($_SESSION["lang"]) && !empty($_SESSION["lang"])){
+		$langue = strval($_SESSION["lang"]);
+		require_once('lang/'.$langue.'/lang.'.$langue.'.php');
+	//	require_once('lang/fr/lang.fr.php');
+	}else{ 
+		$xml = simplexml_load_file('xml/settingsSkin.xml'); 
+		$_SESSION["lang"] = strval($xml->LangChoosed);
+		$langue = strval($_SESSION["lang"]);
+		require_once('lang/'.$langue.'/lang.'.$langue.'.php');
+	//	require_once('lang/fr/lang.fr.php');
+	}
+/*if ($settings['lang'] == "no"){
 include("lang/no/lang.no.php");
 }else{
 include("lang/en/lang.en.php");
-}
+}*/
 ?>
   
 <div class="navbar navbar-default">

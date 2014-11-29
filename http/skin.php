@@ -3,35 +3,50 @@
 	function skinDisplay(){
 		/* take the choice*/
 		if (!isset($_SESSION["skin"]) || !$_SESSION["skin"]){ 
-			$file = simplexml_load_file('xml/settingsSkin.xml'); $_SESSION["skin"] = $file->SkinChooseByUser; 
+			$file = 
+simplexml_load_file('xml/settingsSkin.xml'); $_SESSION["skin"] = 
+$file->SkinChooseByUser; 
 		}
 		/* css */
-		if (strval($_SESSION["skin"])=="default" || !$_SESSION["skin"]){
-			return '<link href="/css/default/bootstrap.min.css" rel="stylesheet"><link href="/css/default/bootstrap-minepeon.css" rel="stylesheet">';
+		if (strval($_SESSION["skin"])=="default" || 
+!$_SESSION["skin"]){
+			return '<link 
+href="/css/default/bootstrap.min.css" rel="stylesheet"><link 
+href="/css/default/bootstrap-minepeon.css" rel="stylesheet">';
 		}else{
-			return '<link href="/css/bootstrap.min-new.css" rel="stylesheet"><link href="/css/'.$_SESSION["skin"].'/bootstrap-minepeon-'.$_SESSION["skin"].'.css" rel="stylesheet">';}
+			return '<link href="/css/bootstrap.min-new.css" 
+rel="stylesheet"><link 
+href="/css/'.$_SESSION["skin"].'/bootstrap-minepeon-'.$_SESSION["skin"].'.css" 
+rel="stylesheet">';}
 
 	}
 	
 /* SETTING FOR CHOSE THE SKIN */
  	function skinChoose(){ //settings
 
-	$formulaire = '<form name="skin" action="/settings.php" method="post" class="form-horizontal">'.
+	$formulaire = '<form name="skin" action="/settings.php" 
+method="post" class="form-horizontal">'.
 	    '<fieldset>'.
 	      '<legend>Skin</legend>'.
 	      '<div class="form-group">'.
-	       '<label for="skin" class="control-label col-lg-3">Skin List</label>'.
+	       '<label for="skin" class="control-label col-lg-3">Skin 
+List</label>'.
 	        '<div class="col-lg-9">'.
 	          '<select name="skin" class="form-control">';
 			#open file
-		$databrute = simplexml_load_file("xml/settingsSkin.xml");
-				foreach($databrute->SkinList->skin as $skin){ 
-					if ($skin == strval($databrute->SkinChooseByUser)){$selected="selected";}else{$selected="";} 
-					$formulaire.='<option value="'.$skin.'" '.$selected.'>'.$skin.'</option>';
+		$databrute = 
+simplexml_load_file("xml/settingsSkin.xml");
+				foreach($databrute->SkinList->skin as 
+$skin){ 
+					if ($skin == 
+strval($databrute->SkinChooseByUser)){$selected="selected";}else{$selected="";} 
+					$formulaire.='<option 
+value="'.$skin.'" '.$selected.'>'.$skin.'</option>';
 				}
 	          $formulaire.='</select>'.
 	          '<br>'.
-	          '<button type="submit" id class="btn btn-default">Save</button>'.
+	          '<button type="submit" id class="btn 
+btn-default">Save</button>'.
 	        '</div>'.
 	      '</div>'.
 	    '</fieldset>'.
@@ -42,17 +57,22 @@
         skinReceptionNewChoice();
         function skinReceptionNewChoice(){
                         $write = 0;
-                        $settings = simplexml_load_file("xml/settingsSkin.xml");
-                if ($_POST['skin'] && $_POST['skin']!= $settings->SkinChooseByUser){
+                        $settings = 
+simplexml_load_file("xml/settingsSkin.xml");
+                if ($_POST['skin'] && $_POST['skin']!= 
+$settings->SkinChooseByUser){
                         foreach($settings->SkinList->skin as $val){
-                                if ($val == $_POST["skin"]){$settings->SkinChooseByUser=$val; $settings->asXml("xml/settingsSkin.xml");}
+                                if ($val == 
+$_POST["skin"]){$settings->SkinChooseByUser=$val; 
+$settings->asXml("xml/settingsSkin.xml");}
 
                         }
                 }
         }
 ?>
 <?php
-$tmp = simplexml_load_file('xml/settingsSkin.xml'); $_SESSION["btcUpdateTime"]=$tmp->trade->update;
+$tmp = simplexml_load_file('xml/settingsSkin.xml'); 
+$_SESSION["btcUpdateTime"]=$tmp->trade->update;
 if(intval($_SESSION["btcUpdateTime"])<intval(time())-1800){
 /* actualized all 1/2 hour (1800s) */ 
 	tradeBtcEuro(); tradeBtcDollars(); 
@@ -77,8 +97,11 @@ function tradeBtcEuro(){
 	  )
 	);
 	$context = stream_context_create($opts);
-	$file=file_get_contents('http://fr.investing.com/currencies/btc-eur', false, $context);
-	$verif=preg_match('|<span\s+class="arial_26"\sid="last_last"\s*>(.*)</span>|',$file,$match);
+	
+$file=file_get_contents('http://fr.investing.com/currencies/btc-eur', 
+false, $context);
+	
+$verif=preg_match('|<span\s+class="arial_26"\sid="last_last"\s*>(.*)</span>|',$file,$match);
 	fclose($file);
 	if ($verif){ 
 		$_SESSION["btceuro"]=$match[1]; 
@@ -101,14 +124,18 @@ function tradeBtcDollars(){
 	  )
 	);
 	$context = stream_context_create($opts);
-	$file=file_get_contents('http://fr.investing.com/currencies/btc-usd', false, $context);
-	$verif=preg_match('|<span\s+class="arial_26"\sid="last_last"\s*>(.*)</span>|',$file,$match);
+	
+$file=file_get_contents('http://fr.investing.com/currencies/btc-usd', 
+false, $context);
+	
+$verif=preg_match('|<span\s+class="arial_26"\sid="last_last"\s*>(.*)</span>|',$file,$match);
 	fclose($file);
 	if ($verif){ 
 		$_SESSION["btcdollars"]=$match[1]; 
 		$xml = simplexml_load_file('xml/settingsSkin.xml'); 
 		$xml->trade->dollars_last=$xml->trade->dollars;
-		$_SESSION["btcdollarsLast"]=floatval($xml->trade->dollars);
+		
+$_SESSION["btcdollarsLast"]=floatval($xml->trade->dollars);
 		$xml->trade->dollars=$_SESSION["btcdollars"];
 		$xml->asXml('xml/settingsSkin.xml');
 	}else{ 
@@ -127,9 +154,28 @@ function webcamChooseDisplay(){
 	}
 		#save the choice in /xml/settings.xml
 		if ($_SESSION["webcam"]>=0){
-			$xml = simplexml_load_file("xml/settingsSkin.xml");
+			$xml = 
+simplexml_load_file("xml/settingsSkin.xml");
 			$xml->DisplayWebcam=$_SESSION["webcam"]; 
 			$xml->asXml("xml/settingsSkin.xml");
 		}
+}
+
+
+//Langue
+function changeLang(){
+	//recept of the form for change the language
+	if(isset($_POST["lang"]) && !empty($_POST["lang"])){
+		$xml = simplexml_load_file('xml/settingsSkin.xml');
+		foreach($xml->LangList as $v){
+			foreach($v as $dim=>$full){
+				
+if(strval($_POST["lang"])==strval($dim)){ 
+$xml->LangChoosed=strval($dim); $xml->asXml("xml/settingsSkin.xml"); }
+			}
+			
+		}
+
+	}
 }
 ?>

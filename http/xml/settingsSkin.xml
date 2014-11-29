@@ -5,7 +5,7 @@
 <SkinChooseByUser>bitecoin</SkinChooseByUser>
 <SkinList>
         <skin>default</skin>
-	<skin>dragon</skin>
+		<skin>dragon</skin>
         <skin>bitecoin</skin>
         <skin>blackskin</skin>
         <skin>fractalDemonix</skin>
@@ -19,4 +19,10 @@
 	<dollars_last>380,83</dollars_last>
 	<update>1411919152</update>
 </trade>
+<LangList>
+	<fr>Français</fr>
+	<en>English</en>
+	<no>norsk</no>
+</LangList>
+<LangChoosed>en</LangChoosed>
 </xml>
