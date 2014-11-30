@@ -12,7 +12,6 @@ if(!isset($settings['update'])) {
 		$_SESSION["lang"] = strval($xml->LangChoosed);
 		$langue = strval($_SESSION["lang"]);
 		require_once('lang/'.$langue.'/lang.'.$langue.'.php');
-	//	require_once('lang/fr/lang.fr.php');
 	}
 /*if ($settings['lang'] == "no"){
 include("lang/no/lang.no.php");

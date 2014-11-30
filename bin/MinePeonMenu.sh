@@ -27,7 +27,7 @@ echo ""
 echo -n "Enter your menu choice [a-0]: "
 read yourch
 case $yourch in
-a) /usr/bin/screen -r;;
+a) /usr/bin/screen -R miner;;
 s) /usr/bin/passwd ;;
 d) /usr/bin/sudo /usr/bin/systemctl stop miner ;;
 f) /usr/bin/sudo /usr/bin/systemctl start miner ;;

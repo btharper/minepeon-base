@@ -162,7 +162,7 @@ simplexml_load_file("xml/settingsSkin.xml");
 }
 
 
-//Langue
+//reeception form Language
 function changeLang(){
 	//recept of the form for change the language
 	if(isset($_POST["lang"]) && !empty($_POST["lang"])){
