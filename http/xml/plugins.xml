@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugins>
+  <pl>
+  <name>Mobile Miner App</name>
+  <maker>tk1337</maker>
+  <description>MobileMiner app allow you to remotely monitor and control your Bitcoin, Litecoin, and other Cryptocoin mining rigs with your phone</description>
+    <downloadurl>https://raw.github.com/mariogrip/minepeon-plugin-MobileMinerApp/master/minepeon-plugin-MobileMinerApp.tar.gz</downloadurl>
+  </pl>
+  <pl>
+  <name>GHashForCash Client</name>
+  <maker>808Mining</maker>
+  <description>GHashForCash Client plugin</description>
+    <downloadurl>https://raw.githubusercontent.com/mariogrip/MinePeon-Updates/master/files/minepeon-plugin-GHashForCashClient.tar.gz</downloadurl>
+  </pl>
+</plugins>
