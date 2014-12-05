@@ -266,6 +266,7 @@ function statsTable($devs) {
           $hrate = $dev['MHSav'] / 1000;
 	  $hrate = number_format((float)$hrate, 2, '.', '');
           $hrate = $hrate . " GH/s";
+          	if ($dev['MHSav'] > 999999){ $hrate = $dev['MHSav'] / 1000000; $hrate = $hrate . " TH/s"; }
         }else{
 	  $hrate = $dev['MHSav'] . " MH/s";
         }
