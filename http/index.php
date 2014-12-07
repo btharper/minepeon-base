@@ -13,31 +13,33 @@ include('settings.inc.php');
 //create_graph("mhsav-year.png", "-1y", "Last Year");
 
 function create_graph($output, $start, $title) {
-  $RRDPATH = '/opt/minepeon/var/rrd/';
-  $options = array(
-    "--slope-mode",
-    "--start", $start,
-    "--title=$title",
-    "--vertical-label=Hash per second",
-    "--lower=0",
-    "DEF:hashrate=" . $RRDPATH . "hashrate.rrd:hashrate:AVERAGE",
-    "CDEF:realspeed=hashrate,1000,*",
-    "LINE2:realspeed#FF0000"
-    );
-//THIS next LINE DON'T LIKE THE UPDATE 
-  $ret = rrd_graph("/opt/minepeon/http/rrd/" . $output, $options);
-  if (! $ret) {
-    //echo "<b>Graph error: </b>".rrd_error()."\n";
-  }
+	$RRDPATH = '/opt/minepeon/var/rrd/';
+	$options = array(
+		"--slope-mode",
+		"--start", $start,
+		"--title=$title",
+		"--vertical-label=Hash per second",
+		"--lower=0",
+		"DEF:hashrate=" . $RRDPATH . "hashrate.rrd:hashrate:AVERAGE",
+		"CDEF:realspeed=hashrate,1000,*",
+		"LINE2:realspeed#FF0000");
+
+	/* This is the offending code that breaks
+	$ret = rrd_graph("/opt/minepeon/http/rrd/" . $output, $options);
+	if(!$ret) {
+		echo "<b>Graph error: </b>".rrd_error()."\n";
+	} */
 }
 
 // A few globals for the title of the page
 $G_MHSav = 0;
 
 //MinePeon temperature
+//TODO: eliminate exec call
 $mpTemp = round(exec('cat /sys/class/thermal/thermal_zone0/temp') / 1000, 2);
 
 //MinePeon Version
+//TODO: eliminate exec call
 $version = exec('cat /opt/minepeon/etc/version');
 
 //MinePeon CPU load
@@ -46,16 +48,16 @@ $mpCPULoad = sys_getloadavg();
 if (isset($_POST['url'])) {
         
 $pools = miner('pools','')['POOLS'];
-  $pool = 0;
-   // echo "changeing";
-  foreach ($pools as $key => $value) {
-    if(isset($value['User']) && $value['URL']==$_POST['url']){
-	   // echo "found";
-	  miner('switchpool',$pool);
-    }
-	$pool = $pool + 1;
-  }
-
+	$pool = 0;
+	//TODO: move this to proper logging
+	//echo "changing";
+	foreach ($pools as $key => $value) {
+		if(isset($value['User']) && $value['URL']==$_POST['url']) {
+			// echo "found";
+			miner('switchpool',$pool);
+		}
+		$pool = $pool + 1;
+	}
 }
 
 $stats = miner("devs", "");
@@ -66,31 +68,32 @@ $pools = miner("pools", "");
 
 include('head.php');
 include('menu.php');
+//TODO: use numfmt_format_currency to write currencies
 ?>
 <div class="container">
-  <h2>Status</h2> <?php echo '<div class="btceuro">1 BTC => '.$_SESSION["btceuro"].' € => '.$_SESSION["btcdollars"].' $</div>'; ?>
-  <?php
-  if (file_exists('/opt/minepeon/http/rrd/mhsav-hour.png')) {
-  ?>
-  <p class="text-center">
-    <img src="rrd/mhsav-hour.png" alt="mhsav.png" />
-    <img src="rrd/mhsav-day.png" alt="mhsav.png" /><br/>
-    <a href="#" id="chartToggle">Display extended charts</a>
-  </p>
-  <p class="text-center collapse chartMore">
-    <img src="rrd/mhsav-week.png" alt="mhsav.png" />
-    <img src="rrd/mhsav-month.png" alt="mhsav.png" />
-  </p>
-  <p class="text-center collapse chartMore">
-    <img src="rrd/mhsav-year.png" alt="mhsav.png" />
-  </p>
-  <?php
-  } else {
-  ?>
-  <center><h1>Graphs not ready yet</h1></center>
-  <center><h2>Please wait upto 5 minutes</h2></center>
-  <?php
-  }
+	<h2>Status</h2><div class="btceuro">1 BTC =><?=$_SESSION["btceuro"]?> &euro; => $<?=$_SESSION["btcdollars"]?> USD</div>'; ?>
+<?php
+if (file_exists('/opt/minepeon/http/rrd/mhsav-hour.png')) {
+?>
+	<p class="text-center">
+		<img src="rrd/mhsav-hour.png" alt="mhsav.png" />
+		<img src="rrd/mhsav-day.png" alt="mhsav.png" /><br/>
+		<a href="#" id="chartToggle">Display extended charts</a>
+	</p>
+	<p class="text-center collapse chartMore">
+		<img src="rrd/mhsav-week.png" alt="mhsav.png" />
+		<img src="rrd/mhsav-month.png" alt="mhsav.png" />
+	</p>
+	<p class="text-center collapse chartMore">
+		<img src="rrd/mhsav-year.png" alt="mhsav.png" />
+	</p>
+<?php
+} else {
+?>
+	<center><h1>Graphs not ready yet</h1></center>
+	<center><h2>Please wait upto 5 minutes</h2></center>
+<?php
+}
 echo webcamDisplay();
 function webcamDisplay(){
 	if (!isset($_SESSION["webcam"])){		
