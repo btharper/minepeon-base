@@ -24,14 +24,14 @@ if (!empty($_SESSION["lang"])) {
 		<li><a href="/plugins.php"><?=$lang["plugins"]?></a></li>
 		<li><a href="/about.php"><?=$lang["about"]?></a></li>
 		<li><a href="http://minepeon.com/forums/" target=_blank>Forum</a></li>
-		<li><a class='btceuro' href="http://fr.investing.com/currencies/btc-eur" target=_blank>BTC/<?=$_SESSION["btceuro"]?> &euro;<?php
+		<li><a class='btceuro' href="http://fr.investing.com/currencies/btc-eur" target=_blank>BTC/<?=$_SESSION["btceuro"]?> &euro; <span class="bitecoinCompareMenu<?php
 			if($_SESSION["btceuro"] > $_SESSION["btceuroLast"]) {
-				echo ' <span class="bitecoinCompareMenuPlus">+</span>';
+				echo 'Plus">+';
 			} elseif($_SESSION["btceuro"] < $_SESSION["btceuroLast"]) {
-				echo ' <span class="bitecoinCompareMenuMinus">-</span>';
-			}elseif($_SESSION["btceuro"]==$_SESSION["btceuroLast"]) {
-				echo ' <span class="bitecoinCompareMenuEgal">=</span>';
-			}?></a></li>
+				echo 'Minus">-';
+			} elseif($_SESSION["btceuro"]==$_SESSION["btceuroLast"]) {
+				echo 'Egal">=';
+			} ?></span></a></li>
 		<li><a class='btcdollars' href="http://fr.investing.com/currencies/btc-usd" target=_blank>
 		<?php echo 'BTC/'.$_SESSION["btcdollars"].' $'; if($_SESSION["btcdollars"]>$_SESSION["btcdollarsLast"]){ echo ' <span class="bitecoinCompareMenuPlus">+</span>';}elseif($_SESSION["btcdollars"]<$_SESSION["btcdollarsLast"]){ echo ' <span class="bitecoinCompareMenuMinus">-</span>';}elseif($_SESSION["btcdollars"]==$_SESSION["btcdollarsLast"]){ echo ' <span class="bitecoinCompareMenuEgal">=</span>';}  ?></a></li>
 <?php 
