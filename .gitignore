@@ -35,6 +35,7 @@ http/plugin.xml
 http/plugins/
 http/redirect/
 http/test.php
+http/xml/settingsSkin.xml
 var/sql/summary.db
 
 
