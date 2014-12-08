@@ -2,36 +2,38 @@
 if(!isset($settings['update'])) {
     $settings['update'] = false;
 }
+
 //include the good language's file
-	if (isset($_SESSION["lang"]) && !empty($_SESSION["lang"])){
-		$langue = strval($_SESSION["lang"]);
-		require_once('lang/'.$langue.'/lang.'.$langue.'.php');
-	//	require_once('lang/fr/lang.fr.php');
-	}else{ 
-		$xml = simplexml_load_file('xml/settingsSkin.xml'); 
-		$_SESSION["lang"] = strval($xml->LangChoosed);
-		$langue = strval($_SESSION["lang"]);
-		require_once('lang/'.$langue.'/lang.'.$langue.'.php');
-	}
-/*if ($settings['lang'] == "no"){
-include("lang/no/lang.no.php");
-}else{
-include("lang/en/lang.en.php");
-}*/
+if (!empty($_SESSION["lang"])) {
+	$langue = strval($_SESSION["lang"]);
+	require_once('lang/'.$langue.'/lang.'.$langue.'.php');
+} else {
+	$xml = simplexml_load_file('xml/settingsSkin.xml');
+	$_SESSION["lang"] = strval($xml->LangChoosed);
+	$langue = strval($_SESSION["lang"]);
+	require_once('lang/'.$langue.'/lang.'.$langue.'.php');
+}
 ?>
-  
 <div class="navbar navbar-default">
 <div class="container">
-    <a class="navbar-brand" href="https://nebuleuse0rion.ddns.net:444/minepeon/">MinePeon<span id="voxedition"> VoxEdition</span></a>
-    <ul class="nav navbar-nav">
-      <li><a href="/"><?php echo $lang["status"]; ?></a></li>
-      <li><a href="/pools.php"><?php echo $lang["pools"]; ?></a></li>
-      <li><a href="/settings.php"><?php echo $lang["settings"]; ?></a></li>
-      <li><a href="/plugins.php"><?php echo $lang["plugins"]; ?></a></li> 
-      <li><a href="/about.php"><?php echo $lang["about"]; ?></a></li>
-      <li><a href="http://minepeon.com/forums/" target=_blank>Forum</a></li>
-      <li><a class='btceuro' href="http://fr.investing.com/currencies/btc-eur" target=_blank><?php echo 'BTC/'.$_SESSION["btceuro"].' €'; if($_SESSION["btceuro"]>$_SESSION["btceuroLast"]){ echo ' <span class="bitecoinCompareMenuPlus">+</span>';}elseif($_SESSION["btceuro"]<$_SESSION["btceuroLast"]){ echo ' <span class="bitecoinCompareMenuMinus">-</span>';}elseif($_SESSION["btceuro"]==$_SESSION["btceuroLast"]){ echo ' <span class="bitecoinCompareMenuEgal">=</span>';} ?></a></li>
-      <li><a class='btcdollars' href="http://fr.investing.com/currencies/btc-usd" target=_blank><?php echo 'BTC/'.$_SESSION["btcdollars"].' $'; if($_SESSION["btcdollars"]>$_SESSION["btcdollarsLast"]){ echo ' <span class="bitecoinCompareMenuPlus">+</span>';}elseif($_SESSION["btcdollars"]<$_SESSION["btcdollarsLast"]){ echo ' <span class="bitecoinCompareMenuMinus">-</span>';}elseif($_SESSION["btcdollars"]==$_SESSION["btcdollarsLast"]){ echo ' <span class="bitecoinCompareMenuEgal">=</span>';}  ?></a></li>
+	<a class="navbar-brand" href="https://nebuleuse0rion.ddns.net:444/minepeon/">MinePeon<span id="voxedition"> VoxEdition</span></a>
+	<ul class="nav navbar-nav">
+		<li><a href="/"><?=$lang["status"]?></a></li>
+		<li><a href="/pools.php"><?=$lang["pools"]?></a></li>
+		<li><a href="/settings.php"><?=$lang["settings"]?></a></li>
+		<li><a href="/plugins.php"><?=$lang["plugins"]?></a></li>
+		<li><a href="/about.php"><?=$lang["about"]?></a></li>
+		<li><a href="http://minepeon.com/forums/" target=_blank>Forum</a></li>
+		<li><a class='btceuro' href="http://fr.investing.com/currencies/btc-eur" target=_blank>BTC/<?=$_SESSION["btceuro"]?> &euro;<?php
+			if($_SESSION["btceuro"] > $_SESSION["btceuroLast"]) {
+				echo ' <span class="bitecoinCompareMenuPlus">+</span>';
+			} elseif($_SESSION["btceuro"] < $_SESSION["btceuroLast"]) {
+				echo ' <span class="bitecoinCompareMenuMinus">-</span>';
+			}elseif($_SESSION["btceuro"]==$_SESSION["btceuroLast"]) {
+				echo ' <span class="bitecoinCompareMenuEgal">=</span>';
+			}?></a></li>
+		<li><a class='btcdollars' href="http://fr.investing.com/currencies/btc-usd" target=_blank>
+		<?php echo 'BTC/'.$_SESSION["btcdollars"].' $'; if($_SESSION["btcdollars"]>$_SESSION["btcdollarsLast"]){ echo ' <span class="bitecoinCompareMenuPlus">+</span>';}elseif($_SESSION["btcdollars"]<$_SESSION["btcdollarsLast"]){ echo ' <span class="bitecoinCompareMenuMinus">-</span>';}elseif($_SESSION["btcdollars"]==$_SESSION["btcdollarsLast"]){ echo ' <span class="bitecoinCompareMenuEgal">=</span>';}  ?></a></li>
 <?php 
    if ($handle = opendir('plugins/api_menu/')) {
         while (false !== ($entry = readdir($handle))) {
