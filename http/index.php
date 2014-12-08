@@ -71,7 +71,7 @@ include('menu.php');
 //TODO: use numfmt_format_currency to write currencies
 ?>
 <div class="container">
-	<h2>Status</h2><div class="btceuro">1 BTC =><?=$_SESSION["btceuro"]?> &euro; => $<?=$_SESSION["btcdollars"]?> USD</div>'; ?>
+	<h2>Status</h2><div class="btceuro">1 BTC =><?=$_SESSION["btceuro"]?> &euro; => $<?=$_SESSION["btcdollars"]?> USD</div>
 <?php
 if (file_exists('/opt/minepeon/http/rrd/mhsav-hour.png')) {
 ?>
