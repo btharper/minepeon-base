@@ -4,13 +4,12 @@ require('miner.inc.php');
 include('functions.inc.php');
 include('settings.inc.php');
 
-// TEMPORARILY BLOCKS INCOMPATIBILITY WITH UPDATE OF ArchLinux
-// FIX with http://minepeon.com/forums/viewtopic.php?f=19&t=1756&p=8427#p8427
-//create_graph("mhsav-hour.png", "-1h", "Last Hour");
-//create_graph("mhsav-day.png", "-1d", "Last Day");
-//create_graph("mhsav-week.png", "-1w", "Last Week");
-//create_graph("mhsav-month.png", "-1m", "Last Month");
-//create_graph("mhsav-year.png", "-1y", "Last Year");
+// Re-activate. if you have problem (no WEBUI for index.php) connect with ssh to your minepeon and update rrdtool (option "r")
+create_graph("mhsav-hour.png", "-1h", "Last Hour");
+create_graph("mhsav-day.png", "-1d", "Last Day");
+create_graph("mhsav-week.png", "-1w", "Last Week");
+create_graph("mhsav-month.png", "-1m", "Last Month");
+create_graph("mhsav-year.png", "-1y", "Last Year");
 
 function create_graph($output, $start, $title) {
   $RRDPATH = '/opt/minepeon/var/rrd/';
