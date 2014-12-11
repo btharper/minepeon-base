@@ -68,7 +68,7 @@ include('head.php');
 include('menu.php');
 ?>
 <div class="container">
-  <h2>Status</h2> <?php echo '<div class="btceuro">1 BTC => '.$_SESSION["btceuro"].' € => '.$_SESSION["btcdollars"].' $</div>'; ?>
+  <h2>Status</h2> <?php echo '<div class="btceuro">'.$_SESSION["btceuro"].' € <=> 1 BTC <=>'.$_SESSION["btcdollars"].' $</div>'; ?>
   <?php
   if (file_exists('/opt/minepeon/http/rrd/mhsav-hour.png')) {
   ?>
