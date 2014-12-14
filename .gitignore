@@ -37,6 +37,5 @@ http/redirect/
 http/test.php
 http/xml/settingsSkin.xml
 var/sql/summary.db
-
-
+http/xml/settingsSkin.xml
 

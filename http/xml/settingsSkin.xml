@@ -1,8 +1,14 @@
 <?xml version="1.0"?>
 <xml>
+<<<<<<< HEAD
 <!-- used in index.php for displaying webcam tag, modified in settings.php -->
 <DisplayWebcam>0</DisplayWebcam><!-- 1 = on ; 0 = off -->
 <SkinChooseByUser>default</SkinChooseByUser>
+=======
+<!-- use in index.php for displaying webcam tag and edit in settings.php -->
+<DisplayWebcam>0</DisplayWebcam> <!-- 1 = on ; 0 = off -->
+<SkinChooseByUser>bitecoin</SkinChooseByUser>
+>>>>>>> upstream/master
 <SkinList>
 	<skin>default</skin>
 	<skin>dragon</skin>
@@ -13,10 +19,10 @@
 	<skin>gold</skin>
 </SkinList>
 <trade>
-	<euro>1</euro>
-	<euro_last>1</euro_last>
-	<dollars>1</dollars>
-	<dollars_last>1</dollars_last>
+	<euro>0.00</euro>
+	<euro_last>0.00</euro_last>
+	<dollars>0.00</dollars>
+	<dollars_last>0.00</dollars_last>
 	<update>1</update>
 </trade>
 <LangList><!-- //TODO: full locale support http://userguide.icu-project.org/locale -->

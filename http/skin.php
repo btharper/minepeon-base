@@ -81,7 +81,7 @@ function tradeBtcEuro(){
 $file=file_get_contents('http://fr.investing.com/currencies/btc-eur', 
 false, $context);
 	
-$verif=preg_match('|<span\s+class="arial_26"\sid="last_last"\s*>(.*)</span>|',$file,$match);
+$verif=preg_match('|<span\s+class="arial_26 pid-22-last" id="last_last"\s*>(.*)</span>|',$file,$match);
 	fclose($file);
 	if ($verif){ 
 		$_SESSION["btceuro"]=$match[1]; 
@@ -108,7 +108,7 @@ function tradeBtcDollars(){
 $file=file_get_contents('http://fr.investing.com/currencies/btc-usd', 
 false, $context);
 	
-$verif=preg_match('|<span\s+class="arial_26"\sid="last_last"\s*>(.*)</span>|',$file,$match);
+$verif=preg_match('|<span\s+class="arial_26 pid-21-last" id="last_last"\s*>(.*)</span>|',$file,$match);
 	fclose($file);
 	if ($verif){ 
 		$_SESSION["btcdollars"]=$match[1]; 

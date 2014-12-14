@@ -16,6 +16,7 @@ echo "# [g] Restart Miner                    #"
 echo "# [z] Update MinePeon                  #"
 echo "# [x] Update MinePeon Configuration    #"
 echo "# [c] Update ArchLinux (MinePeon Base) #"
+echo "# [r] Repair RRD (php graphic broken)  #"
 echo "# [v] Reboot MinePeon                  #"
 echo "# [q] Exit to shell                    #"
 echo "########################################"
@@ -36,6 +37,7 @@ z) /opt/minepeon/bin/scripts/MinePeonUIUpdate.sh ;;
 x) /opt/minepeon/bin/scripts/MinePeonConfigUpdate.sh ;;
 c) /opt/minepeon/bin/scripts/ArchUpdate.sh ;;
 z) /usr/bin/sudo /usr/bin/reboot ;;
+r) /opt/minepeon/bin/scripts/repairRRD.sh ;;
 q) exit 0;;
 *) echo "Please select one of the menu items";
 echo "Press Enter to continue. . ." ; read ;;
