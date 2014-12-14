@@ -1,77 +1,57 @@
 <?php
 /* SKIN SAVE OPTIMIZED */
-	function skinDisplay(){
-		/* take the choice*/
-		if (!isset($_SESSION["skin"]) || !$_SESSION["skin"]){ 
-			$file = 
-simplexml_load_file('xml/settingsSkin.xml'); $_SESSION["skin"] = 
-$file->SkinChooseByUser; 
+function skinDisplay() {
+	/* take the choice */
+	if (!isset($_SESSION['skin']) || !$_SESSION['skin']) {
+		$file = simplexml_load_file('xml/settingsSkin.xml');
+		$_SESSION['skin'] = $file->SkinChooseByUser;
+		if(empty($_SESSION['skin'])) {
+			$_SESSION['skin'] = 'default';
 		}
-		/* css */
-		if (strval($_SESSION["skin"])=="default" || 
-!$_SESSION["skin"]){
-			return '<link 
-href="/css/default/bootstrap.min.css" rel="stylesheet"><link 
-href="/css/default/bootstrap-minepeon.css" rel="stylesheet">';
-		}else{
-			return '<link href="/css/bootstrap.min-new.css" 
-rel="stylesheet"><link 
-href="/css/'.$_SESSION["skin"].'/bootstrap-minepeon-'.$_SESSION["skin"].'.css" 
-rel="stylesheet">';}
-
 	}
-	
+	/* css */
+	if (strval($_SESSION['skin'])=='default' || empy($_SESSION['skin'])) {
+		return '<link href="/css/default/bootstrap.min.css" rel="stylesheet"><link href="/css/default/bootstrap-minepeon.css" rel="stylesheet">';
+	} else {
+		return '<link href="/css/bootstrap.min-new.css" rel="stylesheet"><link href="/css/'.$_SESSION['skin'].'/bootstrap-minepeon-'.$_SESSION["skin"].'.css" rel="stylesheet">';
+	}
+}
+
 /* SETTING FOR CHOSE THE SKIN */
- 	function skinChoose(){ //settings
-
-	$formulaire = '<form name="skin" action="/settings.php" 
-method="post" class="form-horizontal">'.
-	    '<fieldset>'.
-	      '<legend>Skin</legend>'.
-	      '<div class="form-group">'.
-	       '<label for="skin" class="control-label col-lg-3">Skin 
-List</label>'.
-	        '<div class="col-lg-9">'.
-	          '<select name="skin" class="form-control">';
-			#open file
-		$databrute = 
-simplexml_load_file("xml/settingsSkin.xml");
-				foreach($databrute->SkinList->skin as 
-$skin){ 
-					if ($skin == 
-strval($databrute->SkinChooseByUser)){$selected="selected";}else{$selected="";} 
-					$formulaire.='<option 
-value="'.$skin.'" '.$selected.'>'.$skin.'</option>';
-				}
-	          $formulaire.='</select>'.
-	          '<br>'.
-	          '<button type="submit" id class="btn 
-btn-default">Save</button>'.
-	        '</div>'.
-	      '</div>'.
-	    '</fieldset>'.
-	  '</form>';
-		return $formulaire;	
+function skinChoose(){ //settings
+	$formulaire = '<form name="skin" action="/settings.php" method="post" class="form-horizontal">'
+		.'<fieldset><legend>Skin</legend><div class="form-group"><label for="skin"'
+		.' class="control-label col-lg-3">Skin List</label><div class="col-lg-9">'
+		.'<select name="skin" class="form-control">';
+	//open file
+	$databrute = simplexml_load_file("xml/settingsSkin.xml");
+	foreach($databrute->SkinList->skin as $skin) {
+		if ($skin == strval($databrute->SkinChooseByUser)) {
+			$selected=' selected="selected"';
+		} else {
+			$selected='';
+		}
+		$formulaire.='<option value="'.$skin.'"'.$selected.'>'.$skin.'</option>';
 	}
+	$formulaire.='</select><br><button type="submit" id class="btn btn-default">Save</button>'
+		.'</div></div></fieldset></form>';
+	return $formulaire;
+} //function skinChose
 
-        skinReceptionNewChoice();
-        function skinReceptionNewChoice(){
-                        $write = 0;
-                        $settings = 
-simplexml_load_file("xml/settingsSkin.xml");
-                if ($_POST['skin'] && $_POST['skin']!= 
-$settings->SkinChooseByUser){
-                        foreach($settings->SkinList->skin as $val){
-                                if ($val == 
-$_POST["skin"]){$settings->SkinChooseByUser=$val; 
-$settings->asXml("xml/settingsSkin.xml");}
+function skinReceptionNewChoice(){
+	$write = 0;
+	$settings = simplexml_load_file("xml/settingsSkin.xml");
+	if(!empty($_POST['skin']) && $_POST['skin'] != $settings->SkinChooseByUser
+		&& in_array($_POST['skin'], $settings->SkinList->skin)) {
+			$settings->SkinChooseByUser=$val;
+			$settings->asXml("xml/settingsSkin.xml");
+	}
+} //function skinReceptionNewChoice
 
-                        }
-                }
-        }
-?>
-<?php
-$tmp = simplexml_load_file('xml/settingsSkin.xml'); 
+//End functions declarations
+skinReceptionNewChoice();
+
+$tmp = simplexml_load_file('xml/settingsSkin.xml');
 $_SESSION["btcUpdateTime"]=$tmp->trade->update;
 if(intval($_SESSION["btcUpdateTime"])<intval(time())-1800){
 /* actualized all 1/2 hour (1800s) */ 
