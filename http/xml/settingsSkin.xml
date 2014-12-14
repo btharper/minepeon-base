@@ -1,14 +1,8 @@
 <?xml version="1.0"?>
 <xml>
-<<<<<<< HEAD
 <!-- used in index.php for displaying webcam tag, modified in settings.php -->
 <DisplayWebcam>0</DisplayWebcam><!-- 1 = on ; 0 = off -->
 <SkinChooseByUser>default</SkinChooseByUser>
-=======
-<!-- use in index.php for displaying webcam tag and edit in settings.php -->
-<DisplayWebcam>0</DisplayWebcam> <!-- 1 = on ; 0 = off -->
-<SkinChooseByUser>bitecoin</SkinChooseByUser>
->>>>>>> upstream/master
 <SkinList>
 	<skin>default</skin>
 	<skin>dragon</skin>
