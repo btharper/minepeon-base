@@ -67,19 +67,111 @@ if(intval($_SESSION["btcUpdateTime"])<intval(time())-1800){
 	$_SESSION["btcdollarsLast"]=floatval($tmp->trade->dollars_last);
 }
 
+/**
+ * Get Investing.com exchange rates
+ *
+ * @author btharper1221@gmail.com
+ *
+ * @param integer $curr Currency to translate <code>$fromCurr</code> into, using investing.com's indexes.
+ * @param integer $fromCurr Optional. Currency to translate from, defaults to BTC.
+ * @param float $amount Optional. Number of units of <code>$fromCurr</code> to convert into <code>$curr</code>.
+ *
+ * @return array An array consisting of the exchange rate, reverse rate, and converted 
+ * 	<code>$amount</code> of <code>$fromCurr</code> to <code>$curr</code>.
+ */
+function tradeBtcCurr($curr, $fromCurr = 189, $amount = 1) {
+	/*Lookup currency exchange rates based on investing.com's rates
+	* from tool http://www.investing.com/webmaster-tools/currency-converter
+	* GET http://tools.investing.com/currency-converter/index.php?from=XXX&to=ZZZ
+	*	Also returns: Currency list, reverse rate
+	* POST http://tools.investing.com/currency-converter/js/ajax_func.php {action:convert_currencies,cur1:XXX,cur2:ZZZ,amount:Y}
+	*	Returns exactly: rate (rate_basic * amount), rate_basic, and rate_basic_reverse
+	* 189 BTC; 191 LTC; 17 EUR; 12 USD; No leading zeros */
+	//TODO: Permit passing of string currencies (eg EUR,USD)
+	
+	//Setup request data and parameters
+	$formData = 'action=convert_currencies&cur1='.$fromCurr.'&cur2='.$curr.'&amount='.$amount;
+	$fetchUrl = 'http://tools.investing.com/currency-converter/js/ajax_func.php';
+	$httpOpts = array('method' => 'POST',
+			'max_redirects' => 3, //Shouldn't be any redirects
+			'ignore_errors' => true,
+			'content' => $formData,
+			//TODO: proxy support
+			//'timeout' => 2.5, //in seconds
+			'header' => 'Accept: application/xml, text/xml, */*'."\r\n"
+				.'User-Agent: '.getUserAgent()."\r\n"
+				.'Content-Type: application/x-www-form-urlencoded'."\r\n"
+				.'Content-Length: '.strlen($formData)."\r\n"
+			);
+	$context = stream_context_create(array('http'=>$httpOpts));
+	
+	//Grab it, limit fetched result to 2kb as a sanity check
+	$fetch = file_get_contents($fetchUrl, false, $context, -1, 2048);
+	if($fetch === false) {
+		error_log("Failed to fetch currency conversions from $fetchUrl");
+		return null;
+	}
+	
+	//Setup xml parsing
+	if(libxml_use_internal_errors(true) && !empty(libxml_get_errors())) {
+		/*libxml_use_internal_errors(true) suppresses E_WARNINGs on bad xml being passed to
+		* simplexml_load_* and allows PHP scripts to handle errors themselves. When we turn
+		* this on we expect there not to be any errors in the libxml_get_errors() buffer,
+		* but if there are, log an error and clear it. */
+		
+		error_log("Call to libxml_get_errors() was not empty when it was expected to be.");
+		libxml_clear_errors();
+	}
+	
+	//Begin xml parsing and error handling
+	$xml = simplexml_load_string($fetch);
+	if($xml !== false && empty(libxml_get_errors())) {
+		//XML parsing worked and there were no errors
+		return array($xml->rate_basic, $xml->rate_basic_reverse);
+	} else {
+		//Format and print errors
+		$errs = libxml_get_errors();
+		$text = "Failed to parse xml";
+		foreach($errs as $err) {
+			$text .= $err->message." \t";
+		}
+		error_log($text);
+		return null;
+	}
+}
+
+/**
+ * Returns the user's User-Agent, or <code>$default</code>
+ *
+ * @author btharper1221@gmail.com
+ *
+ * @param string $default Optional. User-Agent to use if <code>$_SERVER['HTTP_USER_AGENT']</code> is not present
+ * @return string User-Agent string value
+ */
+function getUserAgent($default = 'Firefox/31') {
+	/*Fetches the user's user agent to be more realistic
+	* fallback to default if user supplied isn't available
+	* 'HTTP_*' will not be populated if run from cli */
+
+	if(empty($_SERVER['HTTP_USER_AGENT'])) {
+		return $default;
+	} else {
+		return trim($_SERVER['HTTP_USER_AGENT']);
+	}
+}
+
 function tradeBtcEuro(){
 	$opts = array(
-	  'http'=>array(
-	    'method'=>"GET",
-	    'header'=>	"Accept-language: en\r\n" .
+	    'http'=>array(
+		'method' => "GET",
+		'header' => "Accept-language: en\r\n" .
 	 	        "Cookie: Infernalis=Creatorem\r\n",
-			'user_agent' => 'Firefox/31'
+		'user_agent' => 'Firefox/31'
 	  )
 	);
 	$context = stream_context_create($opts);
 	
-$file=file_get_contents('http://fr.investing.com/currencies/btc-eur', 
-false, $context);
+$file=file_get_contents('http://fr.investing.com/currencies/btc-eur', false, $context);
 	
 $verif=preg_match('|<span\s+class="arial_26 pid-22-last" id="last_last"\s*>(.*)</span>|',$file,$match);
 	fclose($file);
