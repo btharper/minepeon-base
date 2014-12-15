@@ -17,6 +17,7 @@ echo "# [z] Update MinePeon                  #"
 echo "# [x] Update MinePeon Configuration    #"
 echo "# [c] Update ArchLinux (MinePeon Base) #"
 echo "# [r] Repair RRD (php graphic broken)  #"
+echo "# [p] Repair /opt/minepeon permissions #"
 echo "# [v] Reboot MinePeon                  #"
 echo "# [q] Exit to shell                    #"
 echo "########################################"
@@ -25,10 +26,10 @@ echo "# [ Exit to shell and type logout to ] #"
 echo "# [           Exit System            ] #"
 echo "########################################"
 echo ""
-echo -n "Enter your menu choice [a-0]: "
+echo -n "Enter your menu choice [a-q]: "
 read yourch
 case $yourch in
-a) /usr/bin/screen -R miner;;
+a) /usr/bin/screen -R miner ;;
 s) /usr/bin/passwd ;;
 d) /usr/bin/sudo /usr/bin/systemctl stop miner ;;
 f) /usr/bin/sudo /usr/bin/systemctl start miner ;;
@@ -38,7 +39,8 @@ x) /opt/minepeon/bin/scripts/MinePeonConfigUpdate.sh ;;
 c) /opt/minepeon/bin/scripts/ArchUpdate.sh ;;
 z) /usr/bin/sudo /usr/bin/reboot ;;
 r) /opt/minepeon/bin/scripts/repairRRD.sh ;;
-q) exit 0;;
+p) /opt/minepeon/bin/scripts/fixperms.sh ;;
+q) exit 0 ;;
 *) echo "Please select one of the menu items";
 echo "Press Enter to continue. . ." ; read ;;
 esac
