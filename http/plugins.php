@@ -178,14 +178,13 @@ foreach($files as $file) {
     <tbody>
 
 <?php
-
-foreach($pluginlist->pl as $pli) {     
-
+if($pluginlist !== false) {
+	foreach($pluginlist->pl as $pli) {
 ?>
   <tr>
     <td class='text-left'><?php echo $pli->name; ?></td>
     <td><?php echo $pli->maker; ?></td>
-    <td><?php echo $pli->description; ?></td>  
+    <td><?php echo $pli->description; ?></td>
     <td>
 	<form name="instal" action="/plugins.php" method="post" class="form-horizontal">
 	<input type="hidden" name="wget" value="<?php echo $pli->downloadurl; ?>" />
@@ -196,14 +195,12 @@ foreach($pluginlist->pl as $pli) {
     </tr>
 
 <?php
+	}
 }
 ?>
 </tbody>
-  </table>  
-
+  </table>
         </div>
-
-
 <?php
 
 include('foot.php');
