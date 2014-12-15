@@ -91,18 +91,15 @@ include('menu.php');
     <tbody>
 
 <?php
-
 $directory = "plugins/";
 $files = glob($directory . "*");
- 
-foreach($files as $file)
-{
-$plugin=simplexml_load_file($file . "/plugin.xml");
- if(is_dir($file)){
- if($file != "plugins/api_menu"){
- if($file != "plugins/api_settings"){
- if($file != "plugins/api_pools"){
 
+foreach($files as $file) {
+	$plugin=simplexml_load_file($file . "/plugin.xml");
+	if(is_dir($file)) {
+		 if($file != "plugins/api_menu") {
+			if($file != "plugins/api_settings") {
+				if($file != "plugins/api_pools") {
 ?>
   <tr>
     <td class='text-left'><?php echo $plugin->name; ?></td>
@@ -121,10 +118,10 @@ $plugin=simplexml_load_file($file . "/plugin.xml");
 
   
 <?php
-        }
-      }
-    }
-  }
+				}
+			}
+		}
+	}
 }
 ?>   
 
@@ -210,3 +207,4 @@ foreach($pluginlist->pl as $pli) {
 <?php
 
 include('foot.php');
+?>
