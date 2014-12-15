@@ -3,7 +3,11 @@
 require_once('settings.inc.php');
 require_once('miner.inc.php');
 
-$pluginlist = simplexml_load_file("xml/plugins.xml");
+$pluginlist = false;
+if(is_readable("xml/plugins.xml")) {
+	//make sure there's something there to read
+	$pluginlist = simplexml_load_file("xml/plugins.xml");
+}
 
 if (isset($_FILES["file"]["tmp_name"])) {
 	exec("tar -xzf " . $_FILES["file"]["tmp_name"] . " -C /opt/minepeon/ ");
