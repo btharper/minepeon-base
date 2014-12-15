@@ -7,65 +7,67 @@ $pluginlist = simplexml_load_file("xml/plugins.xml");
 
 if (isset($_FILES["file"]["tmp_name"])) {
 	exec("tar -xzf " . $_FILES["file"]["tmp_name"] . " -C /opt/minepeon/ ");
-       if (is_dir("instal_temp")) {
-	   $plugin=simplexml_load_file("instal_temp/instal.xml");
-	 	if ($plugin->run_sh_file !== "False"){
-	 	exec("/opt/minepeon/http/instal_temp/" . $plugin->run_sh_file); 
-	 	rrmdir('instal_temp');		 
-         if ($plugin->redirect_after != "False"){
-         	header( 'Location: /plugins/' . $plugin->redirect_after ) ;
-      }		 
-    }
-  }
+	if (is_dir("instal_temp")) {
+		$plugin=simplexml_load_file("instal_temp/instal.xml");
+		if ($plugin->run_sh_file !== "False") {
+			exec("/opt/minepeon/http/instal_temp/" . $plugin->run_sh_file);
+			rrmdir('instal_temp');
+			if ($plugin->redirect_after != "False") {
+				header( 'Location: /plugins/' . $plugin->redirect_after );
+			}
+		}
+	}
 }
 
 if (isset($_POST["wget"])) {
-       exec("wget -P /opt/minepeon/http/ -O Tmpfile.tar.gz " . $_POST["wget"]);
+	exec("wget -P /opt/minepeon/http/ -O Tmpfile.tar.gz " . $_POST["wget"]);
 	exec("tar -xzf /opt/minepeon/http/Tmpfile.tar.gz -C /opt/minepeon/ ");
-       unlink('Tmpfile.tar.gz');
-      if (is_dir("instal_temp")) {
-	     $plugin=simplexml_load_file("instal_temp/instal.xml");
-	     if ($plugin->run_sh_file !== "False"){
-	     exec("/opt/minepeon/http/instal_temp/" . $plugin->run_sh_file);  	
-		 rrmdir('instal_temp');
-         if ($plugin->redirect_after != "False"){
-         header( 'Location: /plugins/' . $plugin->redirect_after ) ;
-      }		 
-    }
-  } 
+	unlink('Tmpfile.tar.gz');
+	if (is_dir("instal_temp")) {
+		$plugin=simplexml_load_file("instal_temp/instal.xml");
+		if ($plugin->run_sh_file !== "False") {
+			exec("/opt/minepeon/http/instal_temp/" . $plugin->run_sh_file);
+			rrmdir('instal_temp');
+			if ($plugin->redirect_after != "False") {
+				header( 'Location: /plugins/' . $plugin->redirect_after);
+			}
+		}
+	}
 }
 
 if (isset($_POST['delpl'])) {
-$delpl = $_POST['delpl'];
-list($delpl1,$delpl2) = explode('/', $delpl, 2);
-if (file_exists($delpl . "/uninstal.xml")){
-	$plugin=simplexml_load_file($delpl . "/uninstal.xml");
-    exec("/opt/minepeon/http/" . $delpl . "/" . $plugin->run_sh_file); 
+	$delpl = $_POST['delpl'];
+	list($delpl1,$delpl2) = explode('/', $delpl, 2);
+	if (file_exists($delpl . "/uninstal.xml")) {
+		$plugin=simplexml_load_file($delpl . "/uninstal.xml");
+		if($plugin !== false && !empty($plugin->run_sh_file)) { //Make sure there's something to run
+			exec("/opt/minepeon/http/" . $delpl . "/" . $plugin->run_sh_file);
+		}
+	}
+	rrmdir($_POST['delpl']);
+	//Now clean up api_menu entries
+	unlink('plugins/api_menu/' . $delpl2 . '_apimenu.xml');
+	header('Location: /plugins.php');
 }
-rrmdir($_POST['delpl']);
 
 
 
-unlink('plugins/api_menu/' . $delpl2 . '_apimenu.xml');
-  header('Location: /plugins.php');
+function rrmdir($dir) {
+	if (is_dir($dir)) {
+		$objects = scandir($dir);
+		foreach ($objects as $object) {
+			if ($object != "." && $object != "..") {
+ 				if (filetype($dir."/".$object) == "dir") {
+					rrmdir($dir."/".$object);
+				} else {
+					unlink($dir."/".$object);
+				}
+			}
+		}
+		reset($objects);
+		rmdir($dir);
+	}
 }
-
-
-
-  function rrmdir($dir) {
-  if (is_dir($dir)) {
-    $objects = scandir($dir);
-    foreach ($objects as $object) {
-      if ($object != "." && $object != "..") {
-        if (filetype($dir."/".$object) == "dir") 
-           rrmdir($dir."/".$object); 
-        else unlink   ($dir."/".$object);
-      }
-    }
-    reset($objects);
-    rmdir($dir);
-  }
- }
 
 
 include('head.php');
