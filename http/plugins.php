@@ -99,11 +99,11 @@ $directory = "plugins/";
 $files = glob($directory . "*");
 
 foreach($files as $file) {
-	$plugin=simplexml_load_file($file . "/plugin.xml");
 	if(is_dir($file)) {
-		 if($file != "plugins/api_menu") {
+		if($file != "plugins/api_menu") {
 			if($file != "plugins/api_settings") {
-				if($file != "plugins/api_pools") {
+				if($file != "plugins/api_pools" && is_readable($file.'/plugin.xml')) {
+					$plugin=simplexml_load_file($file . "/plugin.xml");
 ?>
   <tr>
     <td class='text-left'><?php echo $plugin->name; ?></td>
